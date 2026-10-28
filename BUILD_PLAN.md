@@ -2,6 +2,10 @@
 
 Building period: **Oct 27 to Nov 4**. Eight build days (Oct 27 to Nov 3) plus a buffer day (Nov 4). Submission is due Nov 4, 9:00 PM ET, which is **3:00 AM WAT on Nov 5**. Our target: **submitted by Nov 3, 9:00 PM Lagos time.**
 
+## Revised schedule (Oct 28, Day 2)
+
+Day 1 was missed. Today covers Day 1 + Day 2 together: docs commit, Next.js scaffold, provider layer with one real Muse Spark call, Supabase migrations with RLS and synthetic seed, auth with `requireLearnerAccess` and the RLS isolation test, then `lib/reading` (align, evidence, compare) with tests if time remains. Decisions: privacy mode is design-only, no second language, ASR without word timing uses accuracy and category counts only, tool-calling fallback decided only after a real test. Organiser answers pending.
+
 Each day ends with: tests green, deployed, `rules-check` skill run, and this checklist updated.
 
 ## Day 0 (Mon Oct 26, today): no application code
