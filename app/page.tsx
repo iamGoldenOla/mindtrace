@@ -1,11 +1,37 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { getDevUser } from "@/lib/auth/dev";
 import { getRepository } from "@/lib/db";
+import { SeedButton } from "./seed-button";
 
 export default async function Home() {
   const user = await getDevUser();
-  if (!user) redirect("/sign-in");
+  if (!user) {
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-16">
+        <h1 className="font-serif text-4xl leading-tight">
+          Investigate, support, verify.
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed">
+          Most teachers have no specialist to ask why a child struggles to
+          read. MINDTRACE is an AI agent that helps them investigate with real
+          evidence, try a classroom support, and verify whether it worked.
+        </p>
+        <p className="mt-4 text-lg leading-relaxed">
+          First visit? Seed the synthetic demo data, then sign in as a teacher.
+        </p>
+        <SeedButton />
+        <p className="mt-6">
+          <Link className="rounded bg-pine px-6 py-3 text-white" href="/sign-in">
+            Sign in
+          </Link>
+        </p>
+        <p className="mt-6 text-sm">
+          MINDTRACE gives educational observations, not diagnoses. Synthetic
+          data only.
+        </p>
+      </main>
+    );
+  }
   const repo = getRepository();
   const learners = await repo.listLearnersForUser(user.id);
   const recent: { code: string; status: string; started: string }[] = [];

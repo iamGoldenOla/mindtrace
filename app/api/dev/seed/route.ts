@@ -34,7 +34,14 @@ export async function POST() {
     assertDevAuthAllowed();
     await requireDevUser();
   } catch {
-    return NextResponse.json({ error: "Sign in to use this." }, { status: 401 });
+    // Bootstrap: a fresh store has no accounts yet, so seeding is allowed
+    // unauthenticated only until the first seed creates them.
+    const repo = getRepository();
+    const teacherA = await repo.getUserByEmail("teacher.a@example.test");
+    const teacherB = await repo.getUserByEmail("teacher.b@example.test");
+    if (teacherA || teacherB) {
+      return NextResponse.json({ error: "Sign in to use this." }, { status: 401 });
+    }
   }
 
   const db: DbShape = emptyDb();
