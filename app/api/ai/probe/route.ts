@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { z } from "zod";
 import { chat } from "@/lib/ai/provider";
-import { supabaseAnon } from "@/lib/db/client";
+import { getRepository } from "@/lib/db";
+import { DEV_SESSION_COOKIE } from "@/lib/auth/dev";
 
 const Body = z
   .object({
@@ -10,17 +12,15 @@ const Body = z
   .strict();
 
 // The probe spends model credit, so it is disabled entirely in production
-// and requires a signed-in user everywhere else. Anonymous callers learn
-// nothing about server configuration from the error responses.
-async function isSignedIn(req: Request): Promise<boolean> {
-  const header = req.headers.get("authorization");
-  const token = header?.match(/^Bearer (.+)$/i)?.[1];
-  if (!token) {
-    return false;
-  }
+// and requires a signed-in development teacher everywhere else. Anonymous
+// callers learn nothing about server configuration from the error responses.
+async function isSignedIn(): Promise<boolean> {
+  if (process.env.NODE_ENV === "production") return false;
   try {
-    const { data, error } = await supabaseAnon().auth.getUser(token);
-    return !error && !!data.user;
+    const jar = await cookies();
+    const token = jar.get(DEV_SESSION_COOKIE)?.value;
+    if (!token) return false;
+    return (await getRepository().getDevSession(token)) !== null;
   } catch {
     return false;
   }
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }
-  if (!(await isSignedIn(req))) {
+  if (!(await isSignedIn())) {
     return NextResponse.json({ error: "Sign in to use this." }, { status: 401 });
   }
   const parsed = Body.safeParse(

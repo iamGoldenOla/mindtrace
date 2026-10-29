@@ -1,0 +1,107 @@
+{
+  "version": "guides.v1",
+  "guides": [
+    {
+      "slug": "reading-difficulties",
+      "title": "Reading difficulties",
+      "concern": "A learner often reads words differently from what is written.",
+      "observable_behaviours": [
+        "Reads a different vowel sound (hat as hit).",
+        "Leaves off word endings (dig for digs).",
+        "Skips small words or whole lines.",
+        "Reads slowly and tires quickly."
+      ],
+      "context_questions": [
+        "Does this happen with unfamiliar words or with all words?",
+        "Is the learner reading in their home language?",
+        "Was the room noisy or was the learner tired?"
+      ],
+      "alternative_explanations": [
+        "The words or language are unfamiliar.",
+        "The print is small or the page is crowded.",
+        "The learner is tired, anxious, or distracted.",
+        "Instructions were unclear."
+      ],
+      "things_to_try_now": [
+        "Try chunked text or sound-by-sound pointing from the support catalogue.",
+        "Pre-teach 3 to 4 hard words before reading.",
+        "Record a baseline with Form A and compare with a matched follow-up."
+      ],
+      "what_to_record": [
+        "Which words were read differently, exactly as heard.",
+        "Whether the pattern repeats across two attempts.",
+        "What support was tried and for how long."
+      ],
+      "how_to_judge": "Compare words read as written on matched passages before and after the support, with the careful wording on the comparison screen.",
+      "when_to_seek_help": "If the pattern is sustained across attempts plus your observations, consider discussing it with a qualified professional.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "attention-and-executive-function",
+      "title": "Attention and executive function",
+      "concern": "A learner struggles to start, stay with, or finish a task.",
+      "observable_behaviours": [
+        "Starts quickly then stops partway.",
+        "Loses their place or repeats steps.",
+        "Seems to forget the instruction midway."
+      ],
+      "context_questions": [
+        "How long was the task, and how many steps did it have?",
+        "What time of day was it?",
+        "Did a shorter version go better?"
+      ],
+      "alternative_explanations": [
+        "The task was long or had many steps.",
+        "The learner was tired or hungry.",
+        "The instructions were given all at once.",
+        "The format did not suit them."
+      ],
+      "things_to_try_now": [
+        "Give one step at a time with extra processing time.",
+        "Shorten the task and add a visible break.",
+        "Let the learner respond in a different format."
+      ],
+      "what_to_record": [
+        "How long the learner stayed with the task, in minutes.",
+        "Which step they reached before stopping.",
+        "What changed when the task was shortened."
+      ],
+      "how_to_judge": "Compare completion on the same task shape before and after the change.",
+      "when_to_seek_help": "If difficulty persists across settings and strategies, consider discussing it with a qualified professional.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "learning-in-a-second-language",
+      "title": "Learning in a second or additional language",
+      "concern": "A learner who speaks another language at home makes consistent sound-pattern errors in English reading.",
+      "observable_behaviours": [
+        "Substitutes sounds that do not exist in the home language.",
+        "Reads fluently in the home language but hesitates in English.",
+        "Understands the story when it is discussed but stumbles reading it."
+      ],
+      "context_questions": [
+        "Which languages does the learner speak at home?",
+        "How long have they been learning in English?",
+        "Do the errors follow a consistent sound pattern?"
+      ],
+      "alternative_explanations": [
+        "The sound pattern is unfamiliar, not a reading barrier.",
+        "Vocabulary in the passage is new.",
+        "The learner has had less time with English print."
+      ],
+      "things_to_try_now": [
+        "Pre-teach vocabulary with pictures before reading.",
+        "Use listen-then-read so the sounds are heard first.",
+        "Check understanding by discussion, not only by reading aloud."
+      ],
+      "what_to_record": [
+        "Home language and time learning in English.",
+        "Which sound patterns repeat.",
+        "Whether discussion shows the content is understood."
+      ],
+      "how_to_judge": "Look for the pattern across attempts and check it against the home-language explanation first.",
+      "when_to_seek_help": "If difficulty persists in all languages the learner uses, consider discussing it with a qualified professional.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    }
+  ]
+}

@@ -1,85 +1,53 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { supabaseAnon } from "@/lib/db/client";
+import { DEV_TEACHERS } from "@/lib/auth/dev";
 
 export default function SignInPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
-  const [signedIn, setSignedIn] = useState(false);
 
-  async function signIn(e: React.FormEvent) {
-    e.preventDefault();
+  async function signIn(email: string) {
     setMessage(null);
-    try {
-      const db = supabaseAnon();
-      const { error } = await db.auth.signInWithPassword({ email, password });
-      if (error) {
-        setMessage("Sign-in did not work. Check the email and password.");
-        return;
-      }
-      setSignedIn(true);
-      setMessage("Signed in.");
-    } catch {
+    const res = await fetch("/api/dev/sign-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    if (!res.ok) {
       setMessage("Sign-in did not work. Try again.");
+      return;
     }
-  }
-
-  async function signOut() {
-    try {
-      await supabaseAnon().auth.signOut();
-    } finally {
-      setSignedIn(false);
-      setMessage("Signed out.");
-    }
+    router.push("/learners");
+    router.refresh();
   }
 
   return (
     <main className="mx-auto max-w-md px-6 py-16">
-      <h1 className="font-serif text-3xl">Sign in</h1>
-      <p className="mt-2">Use your teacher account to open your learners.</p>
-      {signedIn ? (
-        <button
-          type="button"
-          onClick={signOut}
-          className="mt-6 rounded bg-pine px-4 py-2 text-white"
-        >
-          Sign out
-        </button>
-      ) : (
-        <form onSubmit={signIn} className="mt-6 flex flex-col gap-4">
-          <label className="flex flex-col gap-1">
-            Email
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="rounded border border-rule px-3 py-2"
-              autoComplete="email"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            Password
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded border border-rule px-3 py-2"
-              autoComplete="current-password"
-            />
-          </label>
+      <p className="rounded border border-marigold bg-paper px-3 py-2 text-sm">
+        Development sign-in, not for production. Synthetic teachers only.
+      </p>
+      <h1 className="mt-6 font-serif text-3xl">Sign in</h1>
+      <p className="mt-2">Choose a synthetic teacher account.</p>
+      <div className="mt-6 flex flex-col gap-3">
+        {DEV_TEACHERS.map((t) => (
           <button
-            type="submit"
-            className="rounded bg-pine px-4 py-2 text-white"
+            key={t.email}
+            type="button"
+            onClick={() => signIn(t.email)}
+            className="rounded bg-pine px-4 py-3 text-left text-white"
           >
-            Sign in
+            {t.displayName}
+            <span className="block text-sm opacity-80">{t.email}</span>
           </button>
-        </form>
-      )}
-      {message ? <p className="mt-4" role="status">{message}</p> : null}
+        ))}
+      </div>
+      {message ? (
+        <p className="mt-4" role="status">
+          {message}
+        </p>
+      ) : null}
     </main>
   );
 }

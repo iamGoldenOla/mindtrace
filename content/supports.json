@@ -1,0 +1,77 @@
+{
+  "version": "supports.v1",
+  "supports": [
+    {
+      "key": "chunked-text",
+      "name": "Chunked text",
+      "barrier": "decoding",
+      "description": "Cover all but 2 to 3 words so the learner reads a small group at a time.",
+      "how_to_try": "Use a card to show 2 to 3 words. Move it along as the learner reads.",
+      "how_to_evaluate": "Compare words read as written on the next matched passage."
+    },
+    {
+      "key": "sound-by-sound-pointing",
+      "name": "Sound-by-sound pointing",
+      "barrier": "decoding",
+      "description": "The adult points under each sound while the learner says it, then blends the word.",
+      "how_to_try": "Point slowly under each letter group. Ask the learner to say each sound, then the whole word.",
+      "how_to_evaluate": "Note vowel-sound errors on the follow-up Trace."
+    },
+    {
+      "key": "reading-ruler",
+      "name": "Reading ruler",
+      "barrier": "tracking",
+      "description": "A plain card under the line being read keeps the place on the page.",
+      "how_to_try": "Place a blank card just under the line. Move it down line by line.",
+      "how_to_evaluate": "Note skipped lines or repeated lines on the next attempt."
+    },
+    {
+      "key": "pre-teach-vocabulary",
+      "name": "Pre-teach vocabulary",
+      "barrier": "vocabulary",
+      "description": "Talk through 3 to 4 passage words before reading, with a picture or example.",
+      "how_to_try": "Pick the hardest words. Say each, show what it means, use it in a sentence.",
+      "how_to_evaluate": "Check whether those words are read as written next time."
+    },
+    {
+      "key": "listen-then-read",
+      "name": "Listen then read",
+      "barrier": "decoding",
+      "description": "The adult reads the passage aloud first while the learner follows, then the learner reads it.",
+      "how_to_try": "Read at a steady pace, pointing at each word. Then the learner reads the same passage.",
+      "how_to_evaluate": "Compare accuracy on a matched follow-up passage."
+    },
+    {
+      "key": "shorter-instructions",
+      "name": "Shorter instructions",
+      "barrier": "instructions",
+      "description": "Give one step at a time and check before adding the next.",
+      "how_to_try": "Say the first step only. Wait for it, then give the next step.",
+      "how_to_evaluate": "Note whether the learner starts without re-asking."
+    },
+    {
+      "key": "extra-processing-time",
+      "name": "Extra processing time",
+      "barrier": "instructions",
+      "description": "Pause at least 5 seconds after a question before repeating or helping.",
+      "how_to_try": "Ask once. Count silently to five. Repeat once if needed.",
+      "how_to_evaluate": "Note answers given after the pause."
+    },
+    {
+      "key": "different-response-format",
+      "name": "Respond in a different format",
+      "barrier": "format",
+      "description": "Let the learner point, say, or show the answer instead of writing it.",
+      "how_to_try": "Offer two ways to answer. Let the learner choose.",
+      "how_to_evaluate": "Note whether the barrier changes with the format."
+    },
+    {
+      "key": "tinted-reading-background",
+      "name": "Tinted reading background",
+      "barrier": "tracking",
+      "description": "Offer a pale background tint for the passage as a comfort preference.",
+      "how_to_try": "Let the learner pick none, pale blue, pale yellow, or pale green.",
+      "how_to_evaluate": "Ask which they prefer. Record the choice only; claim no effect."
+    }
+  ]
+}
