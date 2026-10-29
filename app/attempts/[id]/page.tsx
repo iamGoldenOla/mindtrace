@@ -4,6 +4,7 @@ import { getDevUser } from "@/lib/auth/dev";
 import { requireLearnerAccess } from "@/lib/auth/access";
 import { getRepository } from "@/lib/db";
 import { CorrectionForm } from "./correction-form";
+import { EvidenceSection } from "./evidence-section";
 
 export default async function AttemptPage({ params }: { params: { id: string } }) {
   const user = await getDevUser();
@@ -63,6 +64,8 @@ export default async function AttemptPage({ params }: { params: { id: string } }
         corrections are recorded as such.
       </p>
       <CorrectionForm attemptId={attempt.id} initial={attempt.transcript_corrected ?? attempt.transcript ?? ""} />
+      <h2 className="mt-6 font-serif text-2xl">Evidence</h2>
+      <EvidenceSection attemptId={attempt.id} />
     </main>
   );
 }
