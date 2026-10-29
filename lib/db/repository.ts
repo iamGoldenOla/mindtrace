@@ -272,6 +272,7 @@ export interface Repository {
   listReportsByInvestigation(investigationId: string): Promise<AiReport[]>;
   reviewReport(id: string, status: AiReport["review_status"], by: string): Promise<AiReport>;
   logRun(row: Omit<AiRun, "id" | "created_at">): Promise<void>;
+  listRunsByInvestigation(investigationId: string): Promise<AiRun[]>;
   listResources(): Promise<Resource[]>;
   getResource(id: string): Promise<Resource | null>;
   logEvent(row: Omit<AuditEvent, "id" | "created_at">): Promise<void>;
@@ -592,6 +593,13 @@ export class LocalJsonRepository implements Repository {
     const db = await this.load();
     db.ai_runs.push({ ...row, id: newId(), created_at: nowIso() });
     await this.save(db);
+  }
+
+  async listRunsByInvestigation(investigationId: string): Promise<AiRun[]> {
+    const db = await this.load();
+    return db.ai_runs
+      .filter((r) => r.investigation_id === investigationId)
+      .sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
   }
 
   async listResources(): Promise<Resource[]> {
