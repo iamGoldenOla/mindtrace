@@ -6,6 +6,7 @@ import { getRepository } from "@/lib/db";
 import { ObservationForm } from "./observation-form";
 import { ConcernForm } from "./concern-form";
 import { DeleteLearnerButton } from "./delete-learner-button";
+import { Timeline } from "./timeline";
 
 export default async function LearnerPage({ params }: { params: { id: string } }) {
   const user = await getDevUser();
@@ -104,6 +105,9 @@ export default async function LearnerPage({ params }: { params: { id: string } }
           ))}
         </ul>
       )}
+
+      <h2 className="mt-8 font-serif text-2xl">Timeline</h2>
+      <Timeline learnerId={learner.id} />
 
       <div className="mt-10 border-t border-rule pt-4">
         <DeleteLearnerButton learnerId={learner.id} code={learner.code} />
