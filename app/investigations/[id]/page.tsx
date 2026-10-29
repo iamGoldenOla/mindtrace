@@ -4,6 +4,7 @@ import { getDevUser } from "@/lib/auth/dev";
 import { requireLearnerAccess } from "@/lib/auth/access";
 import { getRepository } from "@/lib/db";
 import { RunInvestigationButton } from "./run-investigation-button";
+import { SupportSection } from "./support-section";
 
 export default async function InvestigationPage({ params }: { params: { id: string } }) {
   const user = await getDevUser();
@@ -57,6 +58,7 @@ export default async function InvestigationPage({ params }: { params: { id: stri
       <div className="mt-6">
         <RunInvestigationButton investigationId={investigation.id} />
       </div>
+      <SupportSection investigationId={investigation.id} learnerId={investigation.learner_id} />
       <h2 className="mt-8 font-serif text-2xl">Reports</h2>
       {reports.length === 0 ? (
         <p className="mt-2">No reports yet. Run the investigation above.</p>

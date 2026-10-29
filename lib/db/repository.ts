@@ -260,6 +260,7 @@ export interface Repository {
   updateInvestigation(id: string, patch: Partial<Investigation>): Promise<Investigation>;
   linkAttempt(investigationId: string, attemptId: string): Promise<void>;
   listAttemptIds(investigationId: string): Promise<string[]>;
+  getStrategy(id: string): Promise<SupportStrategy | null>;
   createStrategy(row: Omit<SupportStrategy, "id" | "created_at">): Promise<SupportStrategy>;
   listStrategiesByInvestigation(investigationId: string): Promise<SupportStrategy[]>;
   updateStrategy(id: string, patch: Partial<SupportStrategy>): Promise<SupportStrategy>;
@@ -507,6 +508,11 @@ export class LocalJsonRepository implements Repository {
   async listAttemptIds(investigationId: string): Promise<string[]> {
     const db = await this.load();
     return db.investigation_attempts.filter((x) => x.investigation_id === investigationId).map((x) => x.attempt_id);
+  }
+
+  async getStrategy(id: string): Promise<SupportStrategy | null> {
+    const db = await this.load();
+    return db.support_strategies.find((s) => s.id === id) ?? null;
   }
 
   async createStrategy(row: Omit<SupportStrategy, "id" | "created_at">): Promise<SupportStrategy> {
