@@ -8,3 +8,8 @@ export function getRepository(): Repository {
   if (!instance) instance = new LocalJsonRepository();
   return instance;
 }
+
+/** Test-only: drop the singleton so a fresh DATA_DIR takes effect. */
+export function __resetRepository(): void {
+  instance = null;
+}

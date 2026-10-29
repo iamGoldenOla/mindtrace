@@ -22,9 +22,17 @@ export function assertAllowedModel(model: string): void {
   }
 }
 
+export interface ToolCall {
+  id: string;
+  name: string;
+  argumentsJson: string;
+}
+
 export interface ChatMessage {
-  role: "system" | "user" | "assistant";
+  role: "system" | "user" | "assistant" | "tool";
   content: string;
+  tool_calls?: { id: string; type: "function"; function: { name: string; arguments: string } }[];
+  tool_call_id?: string;
 }
 
 export interface ChatRequest {
@@ -32,12 +40,16 @@ export interface ChatRequest {
   messages: ChatMessage[];
   responseFormat?: "text" | "json";
   timeoutMs?: number;
+  tools?: unknown[];
+  toolChoice?: unknown;
 }
 
 export interface ChatResponse {
   text: string;
   model: string;
   latencyMs: number;
+  finishReason: string | null;
+  toolCalls: ToolCall[];
 }
 
 export type Transcript = {
@@ -97,6 +109,7 @@ export async function chat(req: ChatRequest): Promise<ChatResponse> {
           body: JSON.stringify({
             model,
             messages: req.messages,
+            ...(req.tools ? { tools: req.tools, tool_choice: req.toolChoice ?? "auto" } : {}),
           }),
         },
         timeoutMs
@@ -109,10 +122,28 @@ export async function chat(req: ChatRequest): Promise<ChatResponse> {
         throw new Error(`Meta chat call failed with status ${res.status}.`);
       }
       const data = (await res.json()) as {
-        choices?: { message?: { content?: string } }[];
+        choices?: {
+          finish_reason?: string;
+          message?: {
+            content?: string;
+            tool_calls?: { id: string; type: "function"; function: { name: string; arguments: string } }[];
+          };
+        }[];
       };
-      const text = data.choices?.[0]?.message?.content ?? "";
-      return { text, model, latencyMs: Date.now() - started };
+      const first = data.choices?.[0];
+      const text = first?.message?.content ?? "";
+      const toolCalls: ToolCall[] = (first?.message?.tool_calls ?? []).map((t) => ({
+        id: t.id,
+        name: t.function.name,
+        argumentsJson: t.function.arguments,
+      }));
+      return {
+        text,
+        model,
+        latencyMs: Date.now() - started,
+        finishReason: first?.finish_reason ?? null,
+        toolCalls,
+      };
     } catch (err) {
       lastError = err;
       if (attempt === 0) {
