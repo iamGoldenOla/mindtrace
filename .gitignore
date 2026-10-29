@@ -9,3 +9,5 @@ node_modules/
 *.wav
 *.mp3
 *.webm
+.cache/
+*.tsbuildinfo
