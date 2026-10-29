@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     "Investigate reading barriers with evidence, try a support, and verify what helped.",
 };
 
+// Every page depends on the sign-in cookie, so never prerender statically.
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({
   children,
 }: {
