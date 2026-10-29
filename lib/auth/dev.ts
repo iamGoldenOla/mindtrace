@@ -3,13 +3,9 @@
 // real Supabase Auth instead. Never use these accounts with real data.
 import { cookies } from "next/headers";
 import { getRepository } from "@/lib/db";
+import { DEV_SESSION_COOKIE, DEV_TEACHERS } from "./dev-accounts";
 
-export const DEV_SESSION_COOKIE = "mt_dev_session";
-
-export const DEV_TEACHERS = [
-  { email: "teacher.a@example.test", displayName: "Teacher A (synthetic)" },
-  { email: "teacher.b@example.test", displayName: "Teacher B (synthetic)" },
-] as const;
+export { DEV_SESSION_COOKIE };
 
 export function assertDevAuthAllowed(): void {
   if (process.env.NODE_ENV === "production") {

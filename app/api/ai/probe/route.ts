@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { z } from "zod";
 import { chat } from "@/lib/ai/provider";
 import { getRepository } from "@/lib/db";
-import { DEV_SESSION_COOKIE } from "@/lib/auth/dev";
+import { DEV_SESSION_COOKIE } from "@/lib/auth/dev-accounts";
 
 const Body = z
   .object({

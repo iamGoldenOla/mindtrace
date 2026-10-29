@@ -61,3 +61,23 @@ request construction to capture the raw envelope). Observed:
   live verification above went through the provider layer the route calls.
 - ASR (`/asr/transcribe`) and image (`/images/generations`) shapes: still
   UNVERIFIED (no call made yet).
+
+## 2026-10-29: tool calling VERIFIED, ASR endpoint probed
+
+- Tool calling on `muse-spark-1.3` via `POST {base}/chat/completions` with
+  `tools` + `tool_choice: "auto"`: VERIFIED. The model returned
+  `finish_reason: "tool_calls"` with `message.tool_calls[]`, and answered
+  directly when no tool was needed. `tool_choice: "required"` (and named
+  choices) is rejected with HTTP 400 (`only "auto" is supported`), so the
+  agent loop uses `auto` with a 6-round cap. No BUILD_PLAN fallback needed.
+- ASR: `POST {base}/asr/transcribe` with multipart `file` + `model` fields
+  EXISTS (it validates input and returns HTTP 400 JSON
+  `{sessionId, error{type, message}}` for a synthetic tone clip). The success
+  envelope and word-timing fields are still UNVERIFIED: requests with audio
+  bodies repeatedly hit the 30-90 s client timeout in this sandbox, so no
+  successful transcription was observed here. `lib/ai/transcribe.ts` parses
+  `text`/`transcript` (+ nested `data.*`) and optional
+  `words`/`segments`/`tokens` arrays, and the UI treats missing timing as
+  accuracy-only evidence. One real browser recording will pin the shape;
+  if the endpoint stays unreachable, say so and keep manual entry.
+- `/audio/transcriptions` hangs from here (client timeout); not used.

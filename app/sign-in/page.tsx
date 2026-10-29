@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { DEV_TEACHERS } from "@/lib/auth/dev";
+import { DEV_TEACHERS } from "@/lib/auth/dev-accounts";
 
 export default function SignInPage() {
   const router = useRouter();
