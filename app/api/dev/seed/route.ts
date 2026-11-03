@@ -4,7 +4,7 @@
 import { NextResponse } from "next/server";
 import { align } from "@/lib/reading/align";
 import { getRepository } from "@/lib/db";
-import { requireDevUser, assertDevAuthAllowed } from "@/lib/auth/dev";
+import { requireDevUser, assertDevAuthAllowed, devAuthEnabled } from "@/lib/auth/dev";
 import type { DbShape } from "@/lib/db/repository";
 import { emptyDb, newId, nowIso } from "@/lib/db/repository";
 import supports from "@/content/supports.json";
@@ -27,7 +27,7 @@ function sentencesOf(passage: string): string[] {
 }
 
 export async function POST() {
-  if (process.env.NODE_ENV === "production") {
+  if (!devAuthEnabled()) {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }
   try {

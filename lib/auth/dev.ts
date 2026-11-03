@@ -7,8 +7,18 @@ import { DEV_SESSION_COOKIE, DEV_TEACHERS } from "./dev-accounts";
 
 export { DEV_SESSION_COOKIE };
 
+/**
+ * Development sign-in is always available outside production. On a deployed
+ * demo it is available only when explicitly enabled with
+ * ALLOW_DEV_AUTH=true, so a forgotten env var can never open it by accident.
+ */
+export function devAuthEnabled(): boolean {
+  if (process.env.NODE_ENV !== "production") return true;
+  return process.env.ALLOW_DEV_AUTH === "true";
+}
+
 export function assertDevAuthAllowed(): void {
-  if (process.env.NODE_ENV === "production") {
+  if (!devAuthEnabled()) {
     throw new Error("Development sign-in is not available in production.");
   }
 }
@@ -53,7 +63,7 @@ export async function signOutDev(): Promise<void> {
 }
 
 export async function getDevUser(): Promise<DevUser | null> {
-  if (process.env.NODE_ENV === "production") return null;
+  if (!devAuthEnabled()) return null;
   const jar = await cookies();
   const token = jar.get(DEV_SESSION_COOKIE)?.value;
   if (!token) return null;

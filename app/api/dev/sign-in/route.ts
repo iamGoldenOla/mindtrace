@@ -1,12 +1,13 @@
-// DEV-ONLY sign-in. 404 in production.
+// DEV-ONLY sign-in. 404 unless dev auth is enabled (always on outside
+// production; on a deployment only with ALLOW_DEV_AUTH=true).
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { signInDev } from "@/lib/auth/dev";
+import { devAuthEnabled, signInDev } from "@/lib/auth/dev";
 
 const Body = z.object({ email: z.string().email() });
 
 export async function POST(req: Request) {
-  if (process.env.NODE_ENV === "production") {
+  if (!devAuthEnabled()) {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
   }
   const parsed = Body.safeParse(await req.json().catch(() => ({})));

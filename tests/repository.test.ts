@@ -79,14 +79,33 @@ describe("local repository", () => {
 });
 
 describe("dev auth production refusal", () => {
-  it("refuses development sign-in in production", async () => {
+  it("refuses development sign-in in production without the explicit flag", async () => {
     const writableEnv = process.env as Record<string, string | undefined>;
-    const prior = writableEnv.NODE_ENV;
+    const priorNode = writableEnv.NODE_ENV;
+    const priorFlag = writableEnv.ALLOW_DEV_AUTH;
     writableEnv.NODE_ENV = "production";
+    delete writableEnv.ALLOW_DEV_AUTH;
     try {
       expect(() => assertDevAuthAllowed()).toThrow(/production/i);
     } finally {
-      writableEnv.NODE_ENV = prior;
+      writableEnv.NODE_ENV = priorNode;
+      if (priorFlag === undefined) delete writableEnv.ALLOW_DEV_AUTH;
+      else writableEnv.ALLOW_DEV_AUTH = priorFlag;
+    }
+  });
+
+  it("allows development sign-in in production with ALLOW_DEV_AUTH=true", async () => {
+    const writableEnv = process.env as Record<string, string | undefined>;
+    const priorNode = writableEnv.NODE_ENV;
+    const priorFlag = writableEnv.ALLOW_DEV_AUTH;
+    writableEnv.NODE_ENV = "production";
+    writableEnv.ALLOW_DEV_AUTH = "true";
+    try {
+      expect(() => assertDevAuthAllowed()).not.toThrow();
+    } finally {
+      writableEnv.NODE_ENV = priorNode;
+      if (priorFlag === undefined) delete writableEnv.ALLOW_DEV_AUTH;
+      else writableEnv.ALLOW_DEV_AUTH = priorFlag;
     }
   });
 });
