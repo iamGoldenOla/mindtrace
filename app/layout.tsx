@@ -39,12 +39,14 @@ export default async function RootLayout({
             <Link href="/" className="font-serif text-xl">
               MINDTRACE
             </Link>
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/learners">Learners</Link>
-            <Link href="/resources">Resources</Link>
-            <Link href="/guides">Guides</Link>
-            <span className="ml-auto text-sm">
+            <span className="flex flex-1 flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              <Link href="/">Home</Link>
+              <Link href="/about">About</Link>
+              <Link href="/learners">Learners</Link>
+              <Link href="/resources">Resources</Link>
+              <Link href="/guides">Guides</Link>
+            </span>
+            <span className="text-sm">
               {user ? (
                 <>
                   {user.displayName} <SignOutButton />
