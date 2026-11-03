@@ -20,6 +20,17 @@ Vercel env vars, redeploy, then Seed + sign in on the live URL and run the
 live suites (`SUPABASE_TEST_URL`, `SUPABASE_TEST_ANON_KEY`,
 `SUPABASE_TEST_TOKEN_A/B`, `SUPABASE_TEST_SERVICE_KEY`).
 
+## Status (Nov 3, self-reporting seed)
+
+Seed flow now diagnoses itself: `GET /api/dev/seed` reports
+`{backend, seeded, teachers, learners}` (404 dev-auth off, 500 store
+unreachable); the home-page seed button shows that state live ("not set
+up yet" vs "ready, now sign in") and surfaces the server's real error
+text instead of masking every failure. Gates: tsc clean, lint clean,
+Vitest 70 passed / 5 live-only skips, `next build` all routes. Live
+proof still on the user's machine: Vercel env (4 vars, Production) +
+redeploy, then read the live status line before seeding.
+
 ## Status (Nov 3, landing review fixes)
 
 Uncommitted: shared 1120px/24px page container for top bar, banner and

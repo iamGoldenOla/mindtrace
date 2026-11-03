@@ -28,6 +28,38 @@ function sentencesOf(passage: string): string[] {
   return passage.split(/(?<=\.)\s+/);
 }
 
+export async function GET() {
+  if (!devAuthEnabled()) {
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+  try {
+    const repo = getRepository();
+    const teachers: string[] = [];
+    for (const email of ["teacher.a@example.test", "teacher.b@example.test"]) {
+      const profile = await repo.getUserByEmail(email);
+      if (profile) teachers.push(email);
+    }
+    let learners = 0;
+    const owner = await repo.getUserByEmail("teacher.a@example.test");
+    if (owner) {
+      learners = (await repo.listLearnersForUser(owner.id)).length;
+    }
+    return NextResponse.json({
+      ok: true,
+      backend: supabaseConfigured() ? "supabase" : "local",
+      seeded: teachers.length > 0,
+      teachers,
+      learners,
+    });
+  } catch (err) {
+    console.error("dev seed status failed", err);
+    return NextResponse.json(
+      { error: "The demo store could not be reached. Try again." },
+      { status: 500 },
+    );
+  }
+}
+
 export async function POST() {
   if (!devAuthEnabled()) {
     return NextResponse.json({ error: "Not found." }, { status: 404 });
