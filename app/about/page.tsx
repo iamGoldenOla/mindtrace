@@ -1,26 +1,4 @@
 import Link from "next/link";
-import team from "@/content/team.json";
-
-interface TeamMember {
-  name: string;
-  role: string;
-  initials: string;
-  portrait?: string;
-}
-
-const members = (team as { members: TeamMember[] }).members;
-
-function Monogram({ initials, name }: { initials: string; name: string }) {
-  return (
-    <span
-      role="img"
-      aria-label={`Portrait placeholder for ${name}`}
-      className="flex h-16 w-16 items-center justify-center rounded-full bg-pine font-serif text-xl text-white"
-    >
-      {initials}
-    </span>
-  );
-}
 
 export default function About() {
   return (
@@ -96,34 +74,14 @@ export default function About() {
         synthetic. No real children&apos;s data appears anywhere.
       </p>
 
-      <h2 className="mt-12 font-serif text-2xl">Team</h2>
-      {members.length === 0 ? (
-        <p className="mt-3">
-          Built by the hackathon team. Names and roles will appear here before
-          submission.
-        </p>
-      ) : (
-        <ul className="mt-3 grid gap-5 sm:grid-cols-2">
-          {members.map((m) => (
-            <li key={m.name} className="flex items-center gap-4 rounded bg-paper p-5">
-              {m.portrait ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={m.portrait}
-                  alt={`Portrait of ${m.name}`}
-                  className="h-16 w-16 rounded-full object-cover"
-                />
-              ) : (
-                <Monogram initials={m.initials} name={m.name} />
-              )}
-              <span>
-                <span className="block font-semibold">{m.name}</span>
-                <span className="block text-sm">{m.role}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <h2 className="mt-12 font-serif text-2xl">Built by</h2>
+      <p className="reading mt-3">
+        MINDTRACE was built solely by Akinola Olujobi, an educator and
+        developer in Lagos, Nigeria, during the Meta Global AI Developer
+        Hackathon (Oct 27 to Nov 3, 2026), using Muse Code as the coding
+        assistant. The product design, specifications and decisions are the
+        developer&apos;s own.
+      </p>
 
       <p className="mt-12">
         <Link className="rounded bg-pine px-6 py-3 text-white" href="/sign-in">

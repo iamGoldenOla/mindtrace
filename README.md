@@ -15,7 +15,7 @@ These files are the project's source of truth. A coding agent must read **all** 
 |---|---|
 | `AGENTS.md` | Operating rules for any coding agent. Read first. |
 | `SECURITY.md` | Security, privacy and child-safeguarding rules. Mandatory reading. |
-| `HACKATHON_RULES.md` | Official rules, judging rubric, and our compliance checklist. |
+| `HACKATHON_RULES.md` | Official rules, judging rubric, and the compliance checklist. |
 | `PRD.md` | Product requirements (v0.2), scope, priorities, acceptance criteria. |
 | `ARCHITECTURE.md` | Stack, components, data flow, Meta API integration, environment. |
 | `DATABASE.md` | Postgres schema, row-level security, seed data. |
@@ -42,6 +42,12 @@ These files are the project's source of truth. A coding agent must read **all** 
 ## What was built during the hackathon
 
 Everything in this repository's application code was written between Oct 27 and Nov 4, 2026. Planning documents (this set) were written before the event and are labelled as such in the commit history. No code, data, or assets from earlier projects are used.
+
+## Who built this
+
+MINDTRACE was built solely by Akinola Olujobi, an educator and developer in Lagos, Nigeria, during the Meta Global AI Developer Hackathon (Oct 27 to Nov 3, 2026), using Muse Code as the coding assistant. The product design, specifications and decisions are the developer's own.
+
+Planning documents written before the event were drafted with AI assistance and are labelled as planning in the commit history. All application code was written during the event.
 
 ## Status
 

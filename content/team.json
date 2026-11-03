@@ -1,4 +1,0 @@
-{
-  "_comment": "Team shown on /about. Add one entry per builder: name, role, and initials for the monogram avatar. To use a real photo instead, add a portrait file under public/team/ and a portrait field with its path.",
-  "members": []
-}
