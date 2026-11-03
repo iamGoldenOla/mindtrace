@@ -2,6 +2,21 @@
 
 Building period: **Oct 27 to Nov 4**. Eight build days (Oct 27 to Nov 3) plus a buffer day (Nov 4). Submission is due Nov 4, 9:00 PM ET, which is **3:00 AM WAT on Nov 5**. Our target: **submitted by Nov 3, 9:00 PM Lagos time.**
 
+## Status (Nov 3, landing review fixes)
+
+Uncommitted: shared 1120px/24px page container for top bar, banner and
+content; running text capped near 65ch; hero/Trace/comparison keep full
+container width; About loop/guardrails two-column on desktop, one on
+mobile. Hero Trace hides evidence IDs until hover/focus/selection (table
+view still lists them); legend kept visible. "How it works" uses one
+list-marker numbering; duplicate landing footer notice removed (layout
+footer is the single source). Banner reads "Demo mode: synthetic data
+only, not for real learners." Before/after captions now come from
+align() on the exact drawn transcripts in lib/landing-demo.ts (no
+hand-typed counts); skipped words stay drawn struck-through and counted.
+Gates: tsc clean, lint clean, Vitest 62 passed / 3 live-only skips,
+`next build` 19/19 routes. No API or AI code touched. Not pushed.
+
 ## Status (Oct 30, Day 4)
 
 Verified in-repo: `tsc --noEmit` clean, `next lint` clean, `next build`

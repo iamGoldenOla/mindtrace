@@ -11,6 +11,30 @@ body {
   color: #17242e;
 }
 
+/* One shared page container: top bar, banner and page content all align. */
+.page-container {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Running text stays near 65 characters per line. */
+.reading {
+  max-width: 65ch;
+}
+
+/* Trace evidence IDs: hidden until the segment is hovered or focused. */
+.trace-id {
+  opacity: 0;
+}
+button:hover .trace-id,
+button:focus-visible .trace-id,
+button:focus .trace-id,
+button[data-active="true"] .trace-id {
+  opacity: 1;
+}
+
 :focus-visible {
   outline: 2px solid #1f5c57;
   outline-offset: 2px;

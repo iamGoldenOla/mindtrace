@@ -24,13 +24,13 @@ const heroCorrect = heroWords.filter((r) => r.outcome === "match").length;
 
 function Landing() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-14">
+    <main className="page-container py-14">
       <div className="grid items-center gap-8 lg:grid-cols-2">
         <div>
-          <h1 className="font-serif text-4xl leading-tight">
+          <h1 className="reading font-serif text-4xl leading-tight">
             See why a child stumbles over a word, then check whether your support helped.
           </h1>
-          <p className="mt-4 text-lg leading-relaxed">
+          <p className="reading mt-4 text-lg leading-relaxed">
             MINDTRACE helps teachers investigate a reading difficulty with
             real evidence, choose a classroom support, and compare a matched
             follow-up.
@@ -53,27 +53,41 @@ function Landing() {
             {heroCorrect} of {heroWords.length} words read as written. Each
             word is evidence, counted by code.
           </figcaption>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm" aria-label="Trace legend">
+            <li>
+              <span className="mr-1 inline-block h-0 w-4 border-t-4 border-pine align-middle" />{" "}
+              Read as written
+            </li>
+            <li>
+              <span className="mr-1 inline-block h-0 w-4 border-t-4 border-marigold align-middle" />{" "}
+              Read differently (hover or focus a word for detail)
+            </li>
+            <li>
+              <span className="mr-1 inline-block h-0 w-4 border-t-4 border-madder align-middle" />{" "}
+              Skipped
+            </li>
+          </ul>
         </figure>
       </div>
 
       <h2 id="loop" className="mt-12 font-serif text-2xl">How it works</h2>
-      <ol className="mt-3 divide-y divide-rule border-y border-rule">
+      <ol className="reading mt-3 list-decimal divide-y divide-rule border-y border-rule pl-8">
         <li className="py-3">
-          <span className="font-semibold">1. Observe.</span> Record what happened,
+          <span className="font-semibold">Observe.</span> Record what happened,
           exactly as it happened, with the source. Then the learner reads aloud;
           speech is transcribed and the audio discarded.
         </li>
         <li className="py-3">
-          <span className="font-semibold">2. Investigate.</span> Code aligns every
+          <span className="font-semibold">Investigate.</span> Code aligns every
           word into the Trace. Muse Spark reads the evidence through tools and
           drafts a report; a verifier checks every claim against the evidence.
         </li>
         <li className="py-3">
-          <span className="font-semibold">3. Support.</span> The teacher picks a
+          <span className="font-semibold">Support.</span> The teacher picks a
           concrete strategy from the catalogue and assigns a matched follow-up.
         </li>
         <li className="py-3">
-          <span className="font-semibold">4. Verify.</span> Before and after
+          <span className="font-semibold">Verify.</span> Before and after
           Traces are compared with careful wording that never claims cause.
         </li>
       </ol>
@@ -85,7 +99,7 @@ function Landing() {
       <ComparisonDemo />
 
       <h2 className="mt-12 font-serif text-2xl">Grounded by design</h2>
-      <ul className="mt-3 divide-y divide-rule border-y border-rule">
+      <ul className="reading mt-3 divide-y divide-rule border-y border-rule">
         <li className="py-3">
           Every AI claim cites evidence IDs. Reports that fail verification
           are never shown as successful.
@@ -106,18 +120,12 @@ function Landing() {
 
       <div className="mt-12 rounded bg-paper p-5">
         <h2 className="font-serif text-2xl">Try the demo</h2>
-        <p className="mt-2">
+        <p className="reading mt-2">
           First visit? Seed four synthetic learners, then sign in as Teacher A.
           No real children&apos;s data anywhere.
         </p>
         <SeedButton />
       </div>
-
-      <p className="mt-8 border-t border-rule pt-4 text-sm">
-        MINDTRACE gives educational observations, not diagnoses. If you have
-        concerns about a child&apos;s development or health, talk to a qualified
-        professional.
-      </p>
     </main>
   );
 }
@@ -137,7 +145,7 @@ export default async function Home() {
   recent.sort((a, b) => (a.started < b.started ? 1 : -1));
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-10">
+    <main className="page-container py-10">
       <h1 className="font-serif text-3xl">Today</h1>
       <p className="mt-2">
         Investigate a reading concern, try a support, and verify what helped.

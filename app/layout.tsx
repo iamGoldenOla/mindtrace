@@ -24,15 +24,17 @@ export default async function RootLayout({
       <body className="font-sans antialiased">
         <div
           role="note"
-          aria-label="Development sign-in notice"
-          className="bg-ink px-4 py-2 text-center text-sm text-white"
+          aria-label="Demo mode notice"
+          className="bg-ink py-2 text-sm text-white"
         >
-          Development sign-in, not for production. Synthetic data only.
+          <p className="page-container">
+            Demo mode: synthetic data only, not for real learners.
+          </p>
         </div>
         <header className="border-b border-rule bg-paper">
           <nav
             aria-label="Primary"
-            className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-5 gap-y-2 px-6 py-3"
+            className="page-container flex flex-wrap items-center gap-x-5 gap-y-2 py-3"
           >
             <Link href="/" className="font-serif text-xl">
               MINDTRACE
@@ -54,7 +56,7 @@ export default async function RootLayout({
           </nav>
         </header>
         {children}
-        <footer className="mx-auto max-w-4xl px-6 py-8 text-sm">
+        <footer className="page-container py-8 text-sm">
           <p className="border-t border-rule pt-4">
             MINDTRACE gives educational observations, not diagnoses. If you
             have concerns about a child&apos;s development or health, talk to a

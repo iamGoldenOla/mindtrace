@@ -64,7 +64,8 @@ export function Trace({
                 aria-label={accessibleName(r, i)}
                 title={`${r.evidenceId}${r.observed ? `: heard ${r.observed}` : ""}${r.category ? ` (${r.category.replace(/_/g, " ")})` : ""}`}
                 onClick={() => setSelected(isActive ? null : r.evidenceId)}
-                className={`min-w-[44px] min-h-[44px] px-1 pb-1 text-left ${barClass(r.outcome, teacherEdited)} ${
+                data-active={isActive ? "true" : "false"}
+                className={`group min-w-[44px] min-h-[44px] px-1 pb-1 text-left ${barClass(r.outcome, teacherEdited)} ${
                   isActive ? "bg-mist" : ""
                 }`}
               >
@@ -74,7 +75,7 @@ export function Trace({
                 <span className={r.outcome === "omission" ? "line-through opacity-70" : ""}>
                   {r.target}
                 </span>
-                <span className="block text-xs text-ink">{r.evidenceId}</span>
+                <span className="trace-id block text-xs text-ink">{r.evidenceId}</span>
               </button>
             );
           })}

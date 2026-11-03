@@ -1,7 +1,9 @@
 // Illustrated landing-page demo data. SYNTHETIC DATA. NOT REAL CHILDREN.
-// These word lists power the animated example Trace and the before/after
-// comparison on the landing page. They are hand-built illustrations, not
-// assessment results. Counts are asserted in tests/landing-demo.test.ts.
+// The before/after figures are computed by align() from the exact
+// transcripts drawn below. There are no hand-typed counts: the captions in
+// app/trace-demo.tsx use BASELINE_CORRECT and FOLLOWUP_CORRECT, which come
+// from countCorrect() over the align()-derived word lists.
+import { align } from "@/lib/reading/align";
 
 export type DemoOutcome = "match" | "substitution" | "omission";
 
@@ -36,80 +38,64 @@ export const EXAMPLE_STRIP: DemoWord[] = [
   m("is"),
 ];
 
-/** Form A baseline illustration: 22 of 31 read as written. */
-export const BASELINE_A: DemoWord[] = [
-  m("Sam"),
-  m("has"),
-  o("a"),
-  s("red", "rid"),
-  s("hat", "hit"),
-  m("The"),
-  m("hat"),
-  m("is"),
-  o("on"),
-  m("the"),
-  s("bed", "bad"),
-  m("A"),
-  m("dog"),
-  m("sits"),
-  m("on"),
-  m("the"),
-  s("mat", "met"),
-  m("by"),
-  m("the"),
-  m("shed"),
-  m("Then"),
-  m("the"),
-  m("dog"),
-  m("digs"),
-  o("in"),
-  m("the"),
-  s("sand", "send"),
-  m("and"),
-  m("finds"),
-  m("a"),
-  s("shell", "sell"),
+/** Form A target (31 words, ASSESSMENT_SPEC.md section 2.2). */
+export const FORM_A_TARGET: string[] = [
+  "Sam", "has", "a", "red", "hat", "The", "hat", "is", "on", "the", "bed",
+  "A", "dog", "sits", "on", "the", "mat", "by", "the", "shed", "Then",
+  "the", "dog", "digs", "in", "the", "sand", "and", "finds", "a", "shell",
 ];
 
-/** Form B follow-up illustration with a support applied: 27 of 31. */
-export const FOLLOWUP_B: DemoWord[] = [
-  m("Tom"),
-  m("has"),
-  m("a"),
-  s("tan", "ten"),
-  m("cap"),
-  m("The"),
-  m("cap"),
-  m("is"),
-  m("in"),
-  m("the"),
-  m("bag"),
-  m("A"),
-  m("cat"),
-  m("naps"),
-  m("on"),
-  m("the"),
-  s("rug", "rag"),
-  m("by"),
-  m("the"),
-  m("bench"),
-  m("Then"),
-  m("the"),
-  m("cat"),
-  m("hops"),
-  o("up"),
-  m("the"),
-  s("steps", "stops"),
-  m("and"),
-  m("finds"),
-  m("a"),
-  m("fish"),
+/** Form B target (31 words, matched to Form A by design). */
+export const FORM_B_TARGET: string[] = [
+  "Tom", "has", "a", "tan", "cap", "The", "cap", "is", "in", "the", "bag",
+  "A", "cat", "naps", "on", "the", "rug", "by", "the", "bench", "Then",
+  "the", "cat", "hops", "up", "the", "steps", "and", "finds", "a", "fish",
 ];
+
+/** Exact transcript drawn in the "before" strip. */
+export const BASELINE_TRANSCRIPT: string =
+  "sam has rid hit the hat is the bad a dog sits on the met by " +
+  "the shed then the dog digs the send and finds a sell";
+
+/** Exact transcript drawn in the "after" strip. */
+export const FOLLOWUP_TRANSCRIPT: string =
+  "tom has a ten cap the cap is in the bag a cat naps on the rag " +
+  "by the bench then the cat hops the stops and finds a fish";
+
+function toDemoWords(
+  target: string[],
+  transcript: string,
+  attemptShort: string
+): DemoWord[] {
+  const { records } = align(target, transcript, attemptShort);
+  return records
+    .filter((r) => r.index >= 0)
+    .map((r) => {
+      const word = target[r.index];
+      if (r.outcome === "match") return m(word);
+      if (r.outcome === "substitution") return s(word, r.observed ?? "");
+      return o(word);
+    });
+}
+
+/** Form A baseline illustration, drawn word for word from align() output. */
+export const BASELINE_A: DemoWord[] = toDemoWords(
+  FORM_A_TARGET,
+  BASELINE_TRANSCRIPT,
+  "landing-before"
+);
+
+/** Form B follow-up illustration with a support applied. */
+export const FOLLOWUP_B: DemoWord[] = toDemoWords(
+  FORM_B_TARGET,
+  FOLLOWUP_TRANSCRIPT,
+  "landing-after"
+);
 
 export function countCorrect(words: DemoWord[]): number {
   return words.filter((w) => w.outcome === "match").length;
 }
 
-export const BASELINE_CORRECT = 22;
-export const FOLLOWUP_CORRECT = 27;
+export const BASELINE_CORRECT = countCorrect(BASELINE_A);
+export const FOLLOWUP_CORRECT = countCorrect(FOLLOWUP_B);
 export const SUPPORT_NAME = "sound-by-sound pointing";
