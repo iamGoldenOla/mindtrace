@@ -26,7 +26,7 @@ export default function SignInPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-16">
       <p className="rounded border border-marigold bg-paper px-3 py-2 text-sm">
-        Development sign-in, not for production. Synthetic teachers only.
+        Demo accounts. Synthetic data only.
       </p>
       <h1 className="mt-6 font-serif text-3xl">Sign in</h1>
       <p className="mt-2">Choose a synthetic teacher account.</p>
