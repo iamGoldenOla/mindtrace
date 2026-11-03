@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DEV_TEACHERS } from "@/lib/auth/dev-accounts";
@@ -7,20 +8,33 @@ import { DEV_TEACHERS } from "@/lib/auth/dev-accounts";
 export default function SignInPage() {
   const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<"error" | "seed">("error");
 
   async function signIn(email: string) {
     setMessage(null);
-    const res = await fetch("/api/dev/sign-in", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    if (!res.ok) {
-      setMessage("Sign-in did not work. Try again.");
+    setStatus("error");
+    let res: Response;
+    try {
+      res = await fetch("/api/dev/sign-in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+    } catch {
+      setMessage("Sign-in did not work. Check the dev server is running, then try again.");
       return;
     }
-    router.push("/learners");
-    router.refresh();
+    if (res.ok) {
+      router.push("/learners");
+      router.refresh();
+      return;
+    }
+    if (res.status === 401) {
+      setStatus("seed");
+      setMessage("This demo account is not set up yet. Seed the demo data first, then try again.");
+      return;
+    }
+    setMessage("Sign-in did not work. Try again.");
   }
 
   return (
@@ -45,7 +59,12 @@ export default function SignInPage() {
       </div>
       {message ? (
         <p className="mt-4" role="status">
-          {message}
+          {message}{" "}
+          {status === "seed" ? (
+            <Link className="underline" href="/">
+              Go to the home page to seed
+            </Link>
+          ) : null}
         </p>
       ) : null}
     </main>

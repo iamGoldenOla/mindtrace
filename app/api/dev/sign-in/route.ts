@@ -17,7 +17,14 @@ export async function POST(req: Request) {
   try {
     const user = await signInDev(parsed.data.email);
     return NextResponse.json({ ok: true, user });
-  } catch {
-    return NextResponse.json({ error: "Unknown development account." }, { status: 401 });
+  } catch (err) {
+    // Unknown account is the caller's problem (seed the demo data first).
+    // Anything else is a server problem: log it and report 500 so the
+    // client never mistakes a broken store for a missing account.
+    if (err instanceof Error && err.message === "Unknown development account.") {
+      return NextResponse.json({ error: "Unknown development account." }, { status: 401 });
+    }
+    console.error("dev sign-in failed", err);
+    return NextResponse.json({ error: "Sign-in failed. Try again." }, { status: 500 });
   }
 }
