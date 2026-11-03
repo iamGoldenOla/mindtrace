@@ -141,7 +141,10 @@ describe.runIf(canRun)("supabase repository (live)", () => {
         await repo.deleteLearner(learner.id, teacherA!.id);
       }
     }
-  });
+    // Live network round-trips (20+ sequential REST calls plus Auth) take far
+    // longer than vitest's 5 s default on high-latency links. This is a
+    // timeout budget, not an expectation: the test itself still asserts.
+  }, 120000);
 });
 
 describe.skipIf(canRun)("supabase repository (no live project)", () => {
