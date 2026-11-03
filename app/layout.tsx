@@ -37,6 +37,8 @@ export default async function RootLayout({
             <Link href="/" className="font-serif text-xl">
               MINDTRACE
             </Link>
+            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
             <Link href="/learners">Learners</Link>
             <Link href="/resources">Resources</Link>
             <Link href="/guides">Guides</Link>

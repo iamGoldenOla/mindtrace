@@ -2,6 +2,57 @@
 
 Building period: **Oct 27 to Nov 4**. Eight build days (Oct 27 to Nov 3) plus a buffer day (Nov 4). Submission is due Nov 4, 9:00 PM ET, which is **3:00 AM WAT on Nov 5**. Our target: **submitted by Nov 3, 9:00 PM Lagos time.**
 
+## Status (Oct 30, Day 4)
+
+Verified in-repo: `tsc --noEmit` clean, `next lint` clean, `next build`
+compiles all routes, Vitest 60 passed / 5 skipped (skips are live-only:
+RLS needs a Supabase project, probe success path needs a signed-in
+browser session). Implemented so far: Next.js scaffold, provider layer
+with model allowlist, local JSON store with migrations plus seed file,
+dev auth with learner-access checks, `lib/reading` engine with tests,
+support catalogue and guides JSON, read-aloud flow with Trace, agent
+loop with verifier and streamed progress, report review, strategies,
+matched follow-ups with comparison, resources and guides pages, and the
+landing page (SNAP + animated Trace proof + before/after illustration).
+
+Still pending live proof: dev-server hero walkthrough on localhost:3008
+(sandbox blocks listening sockets, so run it locally), Supabase project
+with RLS tests unskipped, and the 10-case AI eval set against real
+model calls. Checklists below are only ticked when their "Done when"
+was observed live.
+
+Oct 30 pm: landing dressed (hero 3D trace-field via three 0.186.0,
+sections, /about with team slots, Home/About nav). Gates green:
+type-check, lint, tests 64 passed / 5 live-only skips, `next build`
+passes with the new routes. Team names, roles, and portrait files still needed
+from the user (content/team.json is data-driven and empty).
+
+Oct 30 pm (homepage 500 fix): dev-mode chunk failure on `/` traced to the
+three.js import in the server chunk graph. Fix: HeroScene loads with
+ssr:false, `transpilePackages: ["three"]` in next.config.mjs, new
+app/global-error.tsx root boundary. Gates green (type-check, lint,
+64 passed / 5 live-only skips). Production build re-run deliberately
+skipped while the dev server is up (it shares .next and re-corrupts dev).
+Needs: clean GET / 200 in the user's browser.
+
+Nov 2 (RLS suite): tests/rls.test.ts now holds real live assertions
+(cross-teacher read isolation on L-0001 plus observations, unauthorized
+insert rejected with 42501 and nothing persisted). Still gated on
+SUPABASE_TEST_URL / ANON_KEY / TOKEN_A / TOKEN_B, so it skips without a
+live project. Gates green: tsc clean, full Vitest 64 passed / 3 skipped.
+Sandbox has no outbound network, so reachability, migration-apply, and the
+live RLS run must happen on the user's machine (steps in chat).
+All copy-paste SQL consolidated in supabase/setup-live.sql (schema + seed
+with <TEACHER_A/B_UUID> tokens + verification + viewer/revoke statements).
+
+Nov 2 (Step 0 frontend fix, uncommitted): removed the three.js 3D hero
+(663 KB module, failed the 150 KB bar, caused the earlier dev 500).
+Landing hero is now the real Trace fed by align() on Form A (27 of 31
+counted by code). Deleted app/hero-scene.tsx, lib/hero-bars.ts,
+tests/hero-bars.test.ts; uninstalled three/@types/three. Gates green:
+tsc, lint, Vitest 60 passed / 3 skipped, build 19/19 routes.
+Commit blocked in sandbox (git ownership); user commits locally.
+
 ## Revised schedule (Oct 28, Day 2)
 
 Day 1 was missed. Today covers Day 1 + Day 2 together: docs commit, Next.js scaffold, provider layer with one real Muse Spark call, Supabase migrations with RLS and synthetic seed, auth with `requireLearnerAccess` and the RLS isolation test, then `lib/reading` (align, evidence, compare) with tests if time remains. Decisions: privacy mode is design-only, no second language, ASR without word timing uses accuracy and category counts only, tool-calling fallback decided only after a real test. Organiser answers pending.

@@ -24,6 +24,7 @@ Application code itself is original; only the packages below are third-party.
 | @types/react | 18.3.3 | MIT | Types |
 | @types/react-dom | 18.3.0 | MIT | Types |
 
+
 ## Notes
 
 - No application code, data, or assets from earlier projects are used.
