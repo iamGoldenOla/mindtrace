@@ -3,28 +3,28 @@
 -- Auth users for these profiles must exist (created via Supabase Auth);
 -- the UUIDs below are placeholders to be replaced with the real auth user ids.
 
--- Placeholder teacher ids (replace with real auth.users ids):
--- teacher.a@example.test -> 11111111-1111-1111-1111-111111111111
--- teacher.b@example.test -> 22222222-2222-2222-2222-222222222222
+-- Teacher ids for this demo project (replace with new auth.users ids if recreated):
+-- teacher.a@example.test -> f8436e76-5b50-47fe-97e6-39ad27b75ee3
+-- teacher.b@example.test -> f01d2a2a-9329-47ee-8ec5-0d4053148b02
 
 insert into profiles (id, display_name, email, role) values
-  ('11111111-1111-1111-1111-111111111111', 'Teacher A', 'teacher.a@example.test', 'teacher'),
-  ('22222222-2222-2222-2222-222222222222', 'Teacher B', 'teacher.b@example.test', 'teacher')
+  ('f8436e76-5b50-47fe-97e6-39ad27b75ee3', 'Teacher A', 'teacher.a@example.test', 'teacher'),
+  ('f01d2a2a-9329-47ee-8ec5-0d4053148b02', 'Teacher B', 'teacher.b@example.test', 'teacher')
 on conflict (id) do nothing;
 
 insert into learners (code, pseudonym, stage, preferred_language, assessment_language, created_by) values
-  ('L-0001', 'Ade', 'Year 2', 'en', 'en', '11111111-1111-1111-1111-111111111111'),
-  ('L-0002', 'Bola', 'Year 2', 'yo', 'en', '11111111-1111-1111-1111-111111111111'),
-  ('L-0003', 'Chidi', 'Year 2', 'en', 'en', '11111111-1111-1111-1111-111111111111'),
-  ('L-0004', 'Dara', 'Year 2', 'en', 'en', '22222222-2222-2222-2222-222222222222')
+  ('L-0001', 'Ade', 'Year 2', 'en', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0002', 'Bola', 'Year 2', 'yo', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0003', 'Chidi', 'Year 2', 'en', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0004', 'Dara', 'Year 2', 'en', 'en', 'f01d2a2a-9329-47ee-8ec5-0d4053148b02')
 on conflict (code) do nothing;
 
 -- Teacher A owns L-0001..L-0003; Teacher B owns L-0004 (proves isolation).
 insert into learner_access (user_id, learner_id, access_role)
-select '11111111-1111-1111-1111-111111111111', id, 'owner' from learners where code in ('L-0001','L-0002','L-0003')
+select 'f8436e76-5b50-47fe-97e6-39ad27b75ee3', id, 'owner' from learners where code in ('L-0001','L-0002','L-0003')
 on conflict do nothing;
 insert into learner_access (user_id, learner_id, access_role)
-select '22222222-2222-2222-2222-222222222222', id, 'owner' from learners where code = 'L-0004'
+select 'f01d2a2a-9329-47ee-8ec5-0d4053148b02', id, 'owner' from learners where code = 'L-0004'
 on conflict do nothing;
 
 insert into assessment_definitions (slug, name, skill, form, language, instructions, scoring, target) values

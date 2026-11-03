@@ -7,9 +7,10 @@
 -- STEP 0 (do this first, in the Dashboard, not here):
 --   Authentication -> Users -> Add user (email confirmation OFF):
 --     teacher.a@example.test and teacher.b@example.test.
---   Copy each user's UUID, then replace every <TEACHER_A_UUID> and
---   <TEACHER_B_UUID> below with the real ids. Running the seed with the
---   tokens still in place fails loudly on invalid UUID (fail-closed).
+--   The UUIDs below are already filled for this demo project:
+--     teacher.a@example.test -> f8436e76-5b50-47fe-97e6-39ad27b75ee3
+--     teacher.b@example.test -> f01d2a2a-9329-47ee-8ec5-0d4053148b02
+--   If you recreate the project, replace them with the new auth.users ids.
 --
 -- PART 1: schema + RLS (from supabase/migrations/0001_init.sql).
 
@@ -295,26 +296,26 @@ create policy res_read on resources for select using (auth.role() = 'authenticat
 create policy def_read on assessment_definitions for select using (auth.role() = 'authenticated');
 
 -- PART 2: synthetic seed (from supabase/seed.sql).
--- Run AFTER Step 0 (auth users exist) with the UUID tokens replaced.
+-- Run AFTER Step 0 (auth users exist). UUIDs for this demo project are filled in.
 
 insert into profiles (id, display_name, email, role) values
-  ('<TEACHER_A_UUID>', 'Teacher A', 'teacher.a@example.test', 'teacher'),
-  ('<TEACHER_B_UUID>', 'Teacher B', 'teacher.b@example.test', 'teacher')
+  ('f8436e76-5b50-47fe-97e6-39ad27b75ee3', 'Teacher A', 'teacher.a@example.test', 'teacher'),
+  ('f01d2a2a-9329-47ee-8ec5-0d4053148b02', 'Teacher B', 'teacher.b@example.test', 'teacher')
 on conflict (id) do nothing;
 
 insert into learners (code, pseudonym, stage, preferred_language, assessment_language, created_by) values
-  ('L-0001', 'Ade', 'Year 2', 'en', 'en', '<TEACHER_A_UUID>'),
-  ('L-0002', 'Bola', 'Year 2', 'yo', 'en', '<TEACHER_A_UUID>'),
-  ('L-0003', 'Chidi', 'Year 2', 'en', 'en', '<TEACHER_A_UUID>'),
-  ('L-0004', 'Dara', 'Year 2', 'en', 'en', '<TEACHER_B_UUID>')
+  ('L-0001', 'Ade', 'Year 2', 'en', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0002', 'Bola', 'Year 2', 'yo', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0003', 'Chidi', 'Year 2', 'en', 'en', 'f8436e76-5b50-47fe-97e6-39ad27b75ee3'),
+  ('L-0004', 'Dara', 'Year 2', 'en', 'en', 'f01d2a2a-9329-47ee-8ec5-0d4053148b02')
 on conflict (code) do nothing;
 
 -- Teacher A owns L-0001..L-0003; Teacher B owns L-0004 (proves isolation).
 insert into learner_access (user_id, learner_id, access_role)
-select '<TEACHER_A_UUID>', id, 'owner' from learners where code in ('L-0001','L-0002','L-0003')
+select 'f8436e76-5b50-47fe-97e6-39ad27b75ee3', id, 'owner' from learners where code in ('L-0001','L-0002','L-0003')
 on conflict do nothing;
 insert into learner_access (user_id, learner_id, access_role)
-select '<TEACHER_B_UUID>', id, 'owner' from learners where code = 'L-0004'
+select 'f01d2a2a-9329-47ee-8ec5-0d4053148b02', id, 'owner' from learners where code = 'L-0004'
 on conflict do nothing;
 
 insert into assessment_definitions (slug, name, skill, form, language, instructions, scoring, target) values
@@ -348,11 +349,11 @@ select tablename, count(*) as policies from pg_policies where schemaname = 'publ
 
 -- PART 4 (later, only for extended RLS coverage): viewer grant, then revoke.
 -- Clients have no insert policy on learner_access by design, so these run here.
--- Replace <TEACHER_B_UUID>, run the grant, re-run the live RLS suite
--- (insert as B must still fail with 42501), then run the revoke and confirm
--- B reads zero rows again.
+-- UUID for this demo project is filled in. Run the grant, re-run the live
+-- RLS suite (insert as B must still fail with 42501), then run the revoke
+-- and confirm B reads zero rows again.
 -- insert into learner_access(user_id, learner_id, access_role)
--- select '<TEACHER_B_UUID>', id, 'viewer' from learners where code = 'L-0001';
+-- select 'f01d2a2a-9329-47ee-8ec5-0d4053148b02', id, 'viewer' from learners where code = 'L-0001';
 -- update learner_access set revoked_at = now()
--- where user_id = '<TEACHER_B_UUID>'
+-- where user_id = 'f01d2a2a-9329-47ee-8ec5-0d4053148b02'
 --   and learner_id = (select id from learners where code = 'L-0001');
