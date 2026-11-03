@@ -1,9 +1,11 @@
-// DEV-ONLY seed. Rebuilds the local store with synthetic data.
+// DEV-ONLY seed. Rebuilds the store with synthetic data (local JSON file
+// or Supabase, whichever backend getRepository() picked).
 // Returns 404 in production. Requires a signed-in development teacher.
 // SYNTHETIC DATA. NOT REAL CHILDREN.
 import { NextResponse } from "next/server";
 import { align } from "@/lib/reading/align";
-import { getRepository } from "@/lib/db";
+import { getRepository, supabaseConfigured } from "@/lib/db";
+import { supabaseService } from "@/lib/db/service";
 import { requireDevUser, assertDevAuthAllowed, devAuthEnabled } from "@/lib/auth/dev";
 import type { DbShape } from "@/lib/db/repository";
 import { emptyDb, newId, nowIso } from "@/lib/db/repository";
@@ -44,17 +46,42 @@ export async function POST() {
     }
   }
 
+  // On the live database, profiles.id must reference real auth.users rows,
+  // so resolve the synthetic teachers from Auth instead of inventing ids.
+  // (Set up once in the Supabase dashboard: Authentication -> Users.)
+  let authIds: { a: string; b: string } | null = null;
+  if (supabaseConfigured()) {
+    const { data, error } = await supabaseService().auth.admin.listUsers();
+    if (error) {
+      return NextResponse.json(
+        { error: "Seed failed: cannot list auth users." },
+        { status: 500 },
+      );
+    }
+    const find = (email: string) =>
+      data.users.find((u) => u.email?.toLowerCase() === email)?.id ?? null;
+    const a = find("teacher.a@example.test");
+    const b = find("teacher.b@example.test");
+    if (!a || !b) {
+      return NextResponse.json(
+        { error: "Seed failed: create the teacher.a/b auth users first." },
+        { status: 500 },
+      );
+    }
+    authIds = { a, b };
+  }
+
   const db: DbShape = emptyDb();
   const at = nowIso();
   const teacherA = {
-    id: newId(),
+    id: authIds?.a ?? newId(),
     display_name: "Teacher A (synthetic)",
     role: "teacher" as const,
     email: "teacher.a@example.test",
     created_at: at,
   };
   const teacherB = {
-    id: newId(),
+    id: authIds?.b ?? newId(),
     display_name: "Teacher B (synthetic)",
     role: "teacher" as const,
     email: "teacher.b@example.test",

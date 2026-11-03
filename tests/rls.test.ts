@@ -72,6 +72,18 @@ describe.runIf(canRun)("rls isolation (live)", () => {
     expect(obs.data).toHaveLength(0);
   });
 
+  it("anonymous clients cannot write dev_sessions (service role only)", async () => {
+    const anonClient = createClient(url as string, anon as string, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+    const attempt = await anonClient.from("dev_sessions").insert({
+      token: "rls-probe-token",
+      user_id: "00000000-0000-0000-0000-000000000000",
+    });
+    expect(attempt.error).not.toBeNull();
+    expect(attempt.error?.code).toBe("42501");
+  });
+
   it("a teacher with no grant cannot insert observations on L-0001", async () => {
     const a = client(tokenA as string);
     const b = client(tokenB as string);

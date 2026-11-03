@@ -7,9 +7,9 @@
 -- teacher.a@example.test -> 11111111-1111-1111-1111-111111111111
 -- teacher.b@example.test -> 22222222-2222-2222-2222-222222222222
 
-insert into profiles (id, display_name, role) values
-  ('11111111-1111-1111-1111-111111111111', 'Teacher A', 'teacher'),
-  ('22222222-2222-2222-2222-222222222222', 'Teacher B', 'teacher')
+insert into profiles (id, display_name, email, role) values
+  ('11111111-1111-1111-1111-111111111111', 'Teacher A', 'teacher.a@example.test', 'teacher'),
+  ('22222222-2222-2222-2222-222222222222', 'Teacher B', 'teacher.b@example.test', 'teacher')
 on conflict (id) do nothing;
 
 insert into learners (code, pseudonym, stage, preferred_language, assessment_language, created_by) values
@@ -30,13 +30,13 @@ on conflict do nothing;
 insert into assessment_definitions (slug, name, skill, form, language, instructions, scoring, target) values
   ('read-aloud-a', 'Read-Aloud Form A', 'oral_reading', 'A', 'en',
    '{"note": "Baseline passage. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Sam","has","a","red","hat","The","hat","is","on","the","bed","A","dog","sits","on","the","mat","by","the","shed","Then","the","dog","digs","in","the","sand","and","finds","a","shell"]}'::jsonb),
+   '{"words": ["Sam","has","a","red","hat","The","hat","is","on","the","bed","A","dog","sits","on","the","mat","by","the","shed","Then","the","dog","digs","in","the","sand","and","finds","a","shell"], "sentences": ["Sam has a red hat.", "The hat is on the bed.", "A dog sits on the mat by the shed.", "Then the dog digs in the sand and finds a shell."]}'::jsonb),
   ('read-aloud-b', 'Read-Aloud Form B', 'oral_reading', 'B', 'en',
    '{"note": "Matched follow-up passage. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Tom","has","a","tan","cap","The","cap","is","in","the","bag","A","cat","naps","on","the","rug","by","the","bench","Then","the","cat","hops","up","the","steps","and","finds","a","fish"]}'::jsonb),
+   '{"words": ["Tom","has","a","tan","cap","The","cap","is","in","the","bag","A","cat","naps","on","the","rug","by","the","bench","Then","the","cat","hops","up","the","steps","and","finds","a","fish"], "sentences": ["Tom has a tan cap.", "The cap is in the bag.", "A cat naps on the rug by the bench.", "Then the cat hops up the steps and finds a fish."]}'::jsonb),
   ('read-aloud-c', 'Read-Aloud Form C', 'oral_reading', 'C', 'en',
    '{"note": "Spare matched form. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Ben","has","a","pink","bib","The","bib","is","on","the","chair","A","pup","sits","on","the","log","by","the","chest","Then","the","pup","digs","in","the","grass","and","finds","a","shell"]}'::jsonb)
+   '{"words": ["Ben","has","a","pink","bib","The","bib","is","on","the","chair","A","pup","sits","on","the","log","by","the","chest","Then","the","pup","digs","in","the","grass","and","finds","a","shell"], "sentences": ["Ben has a pink bib.", "The bib is on the chair.", "A pup sits on the log by the chest.", "Then the pup digs in the grass and finds a shell."]}'::jsonb)
 on conflict (slug) do nothing;
 
 -- Resource candidates: UNREVIEWED (a person must review before use in reports).

@@ -21,6 +21,7 @@ create type app_role as enum ('teacher','parent','specialist','admin');
 create table profiles (
   id uuid primary key references auth.users on delete cascade,
   display_name text,
+  email text,                              -- synthetic teacher email; unique, see 0002
   role app_role not null default 'teacher',
   created_at timestamptz not null default now()
 );
@@ -207,6 +208,17 @@ create index on observations (learner_id, observed_on desc);
 create index on attempts (learner_id, started_at desc);
 create index on responses (attempt_id);
 create index on investigations (learner_id);
+
+-- Migration 0002 (dev sign-in on the live database): profiles.email plus
+-- the dev_sessions table for cookie sessions. See
+-- supabase/migrations/0002_dev_sessions.sql.
+create unique index profiles_email_unique on profiles (email);
+
+create table dev_sessions (
+  token text primary key,
+  user_id uuid not null references profiles(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
 ```
 
 ## 3. Row-level security
@@ -227,6 +239,9 @@ alter table ai_reports enable row level security;
 alter table resources enable row level security;
 alter table assessment_definitions enable row level security;
 alter table audit_events enable row level security;
+alter table dev_sessions enable row level security;
+-- dev_sessions has no anon policies by design: only the service role
+-- (server routes) may read or write sessions.
 
 create or replace function public.can_access_learner(l uuid, need_write boolean default false)
 returns boolean language sql stable security definer set search_path = public as $$

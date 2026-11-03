@@ -2,6 +2,24 @@
 
 Building period: **Oct 27 to Nov 4**. Eight build days (Oct 27 to Nov 3) plus a buffer day (Nov 4). Submission is due Nov 4, 9:00 PM ET, which is **3:00 AM WAT on Nov 5**. Our target: **submitted by Nov 3, 9:00 PM Lagos time.**
 
+## Status (Nov 3, live database backend)
+
+Supabase backend landed so sign-in persists on the deployment: new
+`lib/db/supabase-repository.ts` implements the full `Repository` interface
+over Postgres; `getRepository()` picks it when `NEXT_PUBLIC_SUPABASE_URL`
+and `SUPABASE_SERVICE_ROLE_KEY` are set, else the local JSON store. Schema
+delta in `supabase/migrations/0002_dev_sessions.sql` (`profiles.email`,
+`dev_sessions` table, RLS enabled with no anon policies); `DATABASE.md`,
+`supabase/seed.sql` (emails plus `sentences` the read page needs) and
+`supabase/setup-live.sql` regenerated from the two sources. Seed route
+resolves teacher ids from Auth on the live backend (profiles.id references
+auth.users). Gates: tsc clean, lint clean, Vitest 67 passed / 5 live-only
+skips, `next build` all routes. Live proof still pending on the user's
+machine: create project, run setup-live.sql, create 2 auth users, set
+Vercel env vars, redeploy, then Seed + sign in on the live URL and run the
+live suites (`SUPABASE_TEST_URL`, `SUPABASE_TEST_ANON_KEY`,
+`SUPABASE_TEST_TOKEN_A/B`, `SUPABASE_TEST_SERVICE_KEY`).
+
 ## Status (Nov 3, landing review fixes)
 
 Uncommitted: shared 1120px/24px page container for top bar, banner and

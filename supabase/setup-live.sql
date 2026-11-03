@@ -20,9 +20,11 @@ create type app_role as enum ('teacher','parent','specialist','admin');
 create table profiles (
   id uuid primary key references auth.users on delete cascade,
   display_name text,
+  email text,
   role app_role not null default 'teacher',
   created_at timestamptz not null default now()
 );
+create unique index profiles_email_unique on profiles (email);
 
 create table learners (
   id uuid primary key default gen_random_uuid(),
@@ -199,6 +201,12 @@ create table audit_events (
   created_at timestamptz not null default now()
 );
 
+create table dev_sessions (
+  token text primary key,
+  user_id uuid not null references profiles(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
 create index on observations (learner_id, observed_on desc);
 create index on attempts (learner_id, started_at desc);
 create index on responses (attempt_id);
@@ -221,6 +229,9 @@ alter table ai_reports enable row level security;
 alter table resources enable row level security;
 alter table assessment_definitions enable row level security;
 alter table audit_events enable row level security;
+alter table dev_sessions enable row level security;
+-- dev_sessions has no anon policies by design: only the service role
+-- (server routes) may read or write sessions.
 
 create or replace function public.can_access_learner(l uuid, need_write boolean default false)
 returns boolean language sql stable security definer set search_path = public as $$
@@ -286,9 +297,9 @@ create policy def_read on assessment_definitions for select using (auth.role() =
 -- PART 2: synthetic seed (from supabase/seed.sql).
 -- Run AFTER Step 0 (auth users exist) with the UUID tokens replaced.
 
-insert into profiles (id, display_name, role) values
-  ('<TEACHER_A_UUID>', 'Teacher A', 'teacher'),
-  ('<TEACHER_B_UUID>', 'Teacher B', 'teacher')
+insert into profiles (id, display_name, email, role) values
+  ('<TEACHER_A_UUID>', 'Teacher A', 'teacher.a@example.test', 'teacher'),
+  ('<TEACHER_B_UUID>', 'Teacher B', 'teacher.b@example.test', 'teacher')
 on conflict (id) do nothing;
 
 insert into learners (code, pseudonym, stage, preferred_language, assessment_language, created_by) values
@@ -309,13 +320,13 @@ on conflict do nothing;
 insert into assessment_definitions (slug, name, skill, form, language, instructions, scoring, target) values
   ('read-aloud-a', 'Read-Aloud Form A', 'oral_reading', 'A', 'en',
    '{"note": "Baseline passage. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Sam","has","a","red","hat","The","hat","is","on","the","bed","A","dog","sits","on","the","mat","by","the","shed","Then","the","dog","digs","in","the","sand","and","finds","a","shell"]}'::jsonb),
+   '{"words": ["Sam","has","a","red","hat","The","hat","is","on","the","bed","A","dog","sits","on","the","mat","by","the","shed","Then","the","dog","digs","in","the","sand","and","finds","a","shell"], "sentences": ["Sam has a red hat.", "The hat is on the bed.", "A dog sits on the mat by the shed.", "Then the dog digs in the sand and finds a shell."]}'::jsonb),
   ('read-aloud-b', 'Read-Aloud Form B', 'oral_reading', 'B', 'en',
    '{"note": "Matched follow-up passage. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Tom","has","a","tan","cap","The","cap","is","in","the","bag","A","cat","naps","on","the","rug","by","the","bench","Then","the","cat","hops","up","the","steps","and","finds","a","fish"]}'::jsonb),
+   '{"words": ["Tom","has","a","tan","cap","The","cap","is","in","the","bag","A","cat","naps","on","the","rug","by","the","bench","Then","the","cat","hops","up","the","steps","and","finds","a","fish"], "sentences": ["Tom has a tan cap.", "The cap is in the bag.", "A cat naps on the rug by the bench.", "Then the cat hops up the steps and finds a fish."]}'::jsonb),
   ('read-aloud-c', 'Read-Aloud Form C', 'oral_reading', 'C', 'en',
    '{"note": "Spare matched form. Adult supervises."}'::jsonb, '{"method": "word_alignment"}'::jsonb,
-   '{"words": ["Ben","has","a","pink","bib","The","bib","is","on","the","chair","A","pup","sits","on","the","log","by","the","chest","Then","the","pup","digs","in","the","grass","and","finds","a","shell"]}'::jsonb)
+   '{"words": ["Ben","has","a","pink","bib","The","bib","is","on","the","chair","A","pup","sits","on","the","log","by","the","chest","Then","the","pup","digs","in","the","grass","and","finds","a","shell"], "sentences": ["Ben has a pink bib.", "The bib is on the chair.", "A pup sits on the log by the chest.", "Then the pup digs in the grass and finds a shell."]}'::jsonb)
 on conflict (slug) do nothing;
 
 -- Resource candidates: UNREVIEWED (a person must review before use in reports).
@@ -327,8 +338,9 @@ insert into resources (title, publisher, url, type, language, topics, audience, 
 on conflict do nothing;
 
 -- PART 3: verification (read-only; run after Parts 1-2).
--- Expect: 15 tables, 4 learners (L-0001..L-0004), RLS enabled on every
--- table, and at least one policy per table.
+-- Expect: 16 tables, 4 learners (L-0001..L-0004), RLS enabled on every
+-- table, and at least one policy per table (dev_sessions intentionally
+-- has RLS enabled with no policies: service role only).
 select tablename from pg_tables where schemaname = 'public' order by 1;
 select code, pseudonym from learners order by code;
 select tablename, rowsecurity from pg_tables where schemaname = 'public' order by 1;
