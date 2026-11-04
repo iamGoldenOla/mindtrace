@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function SignOutButton() {
-  const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
 
   async function signOut() {
@@ -20,8 +18,9 @@ export function SignOutButton() {
       setMessage("Sign-out did not work. Try again.");
       return;
     }
-    router.push("/");
-    router.refresh();
+    // Full reload, not a client-side transition: the signed-in layout must
+    // never paint from stale cache after the session cookie is gone.
+    window.location.assign("/");
   }
 
   return (

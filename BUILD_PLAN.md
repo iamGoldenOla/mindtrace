@@ -28,8 +28,10 @@ signed in and Home never returned to the landing. The route now uses
 devAuthEnabled() like sign-in/seed, the button lands on Home (/) and reports
 a real failure instead of silently navigating. Regression tests pin the live
 case (production + flag = 200 with session and cookie cleared) and the locked
-case (production without flag = 404). Gates: tsc clean, lint clean, Vitest
-72 passed / 5 live-only skips, `next build` all routes.
+case (production without flag = 404). Follow-up: navigate with a full
+reload (`window.location.assign("/")`) so a stale cached layout can never
+paint the signed-in header after the cookie is gone. Gates: tsc clean, lint
+clean, Vitest 72 passed / 5 live-only skips, `next build` all routes.
 
 ## Status (Nov 3, self-reporting seed)
 
