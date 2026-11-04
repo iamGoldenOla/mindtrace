@@ -20,6 +20,17 @@ Vercel env vars, redeploy, then Seed + sign in on the live URL and run the
 live suites (`SUPABASE_TEST_URL`, `SUPABASE_TEST_ANON_KEY`,
 `SUPABASE_TEST_TOKEN_A/B`, `SUPABASE_TEST_SERVICE_KEY`).
 
+## Status (Nov 3, sign-out that works on live)
+
+Sign-out used its own hard production block, ignoring ALLOW_DEV_AUTH, so on
+the deployment it 404d without clearing the session cookie: the user stayed
+signed in and Home never returned to the landing. The route now uses
+devAuthEnabled() like sign-in/seed, the button lands on Home (/) and reports
+a real failure instead of silently navigating. Regression tests pin the live
+case (production + flag = 200 with session and cookie cleared) and the locked
+case (production without flag = 404). Gates: tsc clean, lint clean, Vitest
+72 passed / 5 live-only skips, `next build` all routes.
+
 ## Status (Nov 3, self-reporting seed)
 
 Seed flow now diagnoses itself: `GET /api/dev/seed` reports
