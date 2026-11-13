@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%" fill="none">
+  <!-- Background -->
+  <rect width="800" height="420" rx="16" fill="#FBF9F5" stroke="#E2DCD0" stroke-width="1.5"/>
+
+  <!-- Grid lines -->
+  <line x1="40" y1="90" x2="760" y2="90" stroke="#EFEBE4" stroke-width="1"/>
+  <line x1="40" y1="180" x2="760" y2="180" stroke="#EFEBE4" stroke-width="1"/>
+  <line x1="40" y1="270" x2="760" y2="270" stroke="#EFEBE4" stroke-width="1"/>
+  <line x1="40" y1="360" x2="760" y2="360" stroke="#EFEBE4" stroke-width="1"/>
+
+  <!-- Step 1: Acoustic Waveform Section -->
+  <g id="waveform">
+    <rect x="40" y="30" width="220" height="24" rx="6" fill="#EAE5DC"/>
+    <text x="50" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#2D3748">1. ACOUSTIC SIGNAL (ZERO-RETENTION)</text>
+
+    <!-- Synthetic speech audio wave -->
+    <path d="M 40 120 Q 60 110 80 120 T 120 120 T 160 85 T 180 155 T 200 100 T 220 135 T 240 120 T 270 120 T 300 70 T 320 170 T 340 95 T 360 145 T 380 120 T 430 120 T 460 75 T 480 165 T 500 105 T 520 135 T 550 120 T 610 120 T 640 60 T 660 180 T 680 90 T 700 150 T 720 120 T 760 120" 
+          stroke="#1F4E3D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M 40 120 Q 60 115 80 120 T 120 120 T 160 98 T 180 142 T 200 110 T 220 130 T 240 120 T 270 120 T 300 88 T 320 152 T 340 108 T 360 132 T 380 120 T 430 120 T 460 92 T 480 148 T 500 112 T 520 128 T 550 120 T 610 120 T 640 80 T 660 160 T 680 105 T 700 135 T 720 120 T 760 120" 
+          stroke="#1F4E3D" stroke-width="1.5" stroke-opacity="0.35" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Step 2: Alignment Layer (Target vs Observed Tokens) -->
+  <g id="alignment" transform="translate(0, 150)">
+    <rect x="40" y="30" width="220" height="24" rx="6" fill="#EAE5DC"/>
+    <text x="50" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#2D3748">2. TARGET VS OBSERVED ALIGNMENT</text>
+
+    <!-- Token 1: The (Correct, fast) -->
+    <g transform="translate(60, 65)">
+      <rect width="100" height="52" rx="8" fill="#F0FFF4" stroke="#9AE6B4" stroke-width="1.5"/>
+      <text x="12" y="24" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#22543D">&quot;The&quot;</text>
+      <text x="12" y="42" font-family="monospace" font-size="11" fill="#2F855A">240ms • match</text>
+      <circle cx="86" cy="20" r="5" fill="#38A169"/>
+    </g>
+
+    <!-- Token 2: quick (Correct) -->
+    <g transform="translate(180, 65)">
+      <rect width="110" height="52" rx="8" fill="#F0FFF4" stroke="#9AE6B4" stroke-width="1.5"/>
+      <text x="12" y="24" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#22543D">&quot;quick&quot;</text>
+      <text x="12" y="42" font-family="monospace" font-size="11" fill="#2F855A">410ms • match</text>
+      <circle cx="96" cy="20" r="5" fill="#38A169"/>
+    </g>
+
+    <!-- Token 3: brown -> &quot;drown&quot; (Substitution / Reversal) -->
+    <g transform="translate(310, 65)">
+      <rect width="150" height="52" rx="8" fill="#FFF5F5" stroke="#FEB2B2" stroke-width="1.5"/>
+      <text x="12" y="24" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#9B2C2C">&quot;brown&quot; → &quot;drown&quot;</text>
+      <text x="12" y="42" font-family="monospace" font-size="11" fill="#E53E3E">b/d reversal (610ms)</text>
+      <!-- Warning badge -->
+      <circle cx="134" cy="20" r="6" fill="#E53E3E"/>
+      <line x1="134" y1="17" x2="134" y2="21" stroke="#FFF" stroke-width="1.5"/>
+      <circle cx="134" cy="24" r="0.8" fill="#FFF"/>
+    </g>
+
+    <!-- Token 4: fox (Pause / Hesitation) -->
+    <g transform="translate(480, 65)">
+      <rect width="130" height="52" rx="8" fill="#FFFAF0" stroke="#FBD38D" stroke-width="1.5"/>
+      <text x="12" y="24" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#9C4221">&quot;fox&quot; (pause 1.8s)</text>
+      <text x="12" y="42" font-family="monospace" font-size="11" fill="#DD6B20">hesitation latency</text>
+      <circle cx="114" cy="20" r="5" fill="#DD6B20"/>
+    </g>
+
+    <!-- Token 5: jumps (Self-correction) -->
+    <g transform="translate(630, 65)">
+      <rect width="130" height="52" rx="8" fill="#F0FFF4" stroke="#9AE6B4" stroke-width="1.5"/>
+      <text x="12" y="24" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#22543D">&quot;jumps&quot;</text>
+      <text x="12" y="42" font-family="monospace" font-size="11" fill="#2F855A">self-corrected</text>
+      <circle cx="114" cy="20" r="5" fill="#38A169"/>
+    </g>
+  </g>
+
+  <!-- Step 3: Comparative Trace & Meta AI Verification -->
+  <g id="trace-summary" transform="translate(0, 290)">
+    <rect x="40" y="25" width="720" height="85" rx="10" fill="#FFFFFF" stroke="#E2DCD0" stroke-width="1.5"/>
+    
+    <g transform="translate(60, 40)">
+      <text font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#718096" letter-spacing="0.5">BASELINE VS SCAFFOLDED DELTA</text>
+      <text y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#1A202C">Targeted Ruler &amp; High-Contrast Spacing</text>
+      <text y="42" font-family="system-ui, sans-serif" font-size="12" fill="#4A5568">Reversal rate dropped from 38% to 4% • Fluency improved +22 wpm</text>
+    </g>
+
+    <g transform="translate(560, 42)">
+      <rect width="180" height="50" rx="8" fill="#F7FAFC" stroke="#CBD5E0" stroke-width="1"/>
+      <text x="14" y="20" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#2B6CB0">META AI VERIFIED</text>
+      <text x="14" y="38" font-family="monospace" font-size="11" fill="#2D3748">100% Cites Ev-ID</text>
+      <circle cx="160" cy="25" r="7" fill="#3182CE"/>
+      <polyline points="157,25 159,27 163,22" stroke="#FFF" stroke-width="1.5" fill="none"/>
+    </g>
+  </g>
+</svg>

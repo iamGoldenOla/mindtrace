@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%" fill="none">
+  <!-- Background -->
+  <rect width="800" height="420" rx="16" fill="#FDFBF7" stroke="#E2DCD0" stroke-width="1.5"/>
+
+  <!-- Top Title Bar -->
+  <rect x="40" y="24" width="720" height="46" rx="8" fill="#1F4E3D"/>
+  <text x="60" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">MULTI-MODAL CLASSROOM ACCOMMODATION SUITE</text>
+  <text x="560" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#A7F3D0">PRACTICAL • NON-CLINICAL • ZERO DELAY</text>
+
+  <!-- Card 1: Dyslexia / Orthographic (Reading Ruler & High Spacing) -->
+  <g transform="translate(40, 90)">
+    <rect width="345" height="140" rx="12" fill="#FFFFFF" stroke="#E2DCD0" stroke-width="1.5"/>
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#FEF3C7"/>
+    <!-- Eye icon -->
+    <path d="M 22 32 Q 32 24 42 32 Q 32 40 22 32 Z" stroke="#92400E" stroke-width="2" fill="none"/>
+    <circle cx="32" cy="32" r="3" fill="#92400E"/>
+    <text x="58" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1A202C">Reading Window &amp; Font Spacing</text>
+    <text x="58" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#718096">Orthographic &amp; Visual Crowding Supports</text>
+
+    <!-- Visual representation of reading ruler -->
+    <rect x="16" y="62" width="313" height="62" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="26" y="80" font-family="serif" font-size="12" fill="#94A3B8">The gentle breeze carried yellow leaves across...</text>
+    <!-- Highlighted reading guide strip -->
+    <rect x="22" y="88" width="301" height="24" rx="4" fill="#FEF9C3" stroke="#FACC15" stroke-width="1"/>
+    <text x="28" y="104" font-family="serif" font-size="13" font-weight="600" fill="#713F12">the wide quiet playground at midday.</text>
+  </g>
+
+  <!-- Card 2: Autism & Sensory (Visual Daily Schedule & Transition Countdown) -->
+  <g transform="translate(415, 90)">
+    <rect width="345" height="140" rx="12" fill="#FFFFFF" stroke="#E2DCD0" stroke-width="1.5"/>
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#EDE9FE"/>
+    <!-- Schedule/calendar icon -->
+    <rect x="22" y="22" width="20" height="20" rx="4" stroke="#5B21B6" stroke-width="2" fill="none"/>
+    <line x1="22" y1="28" x2="42" y2="28" stroke="#5B21B6" stroke-width="2"/>
+    <line x1="27" y1="20" x2="27" y2="24" stroke="#5B21B6" stroke-width="2"/>
+    <line x1="37" y1="20" x2="37" y2="24" stroke="#5B21B6" stroke-width="2"/>
+    <text x="58" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1A202C">Visual Schedule &amp; Transition Prep</text>
+    <text x="58" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#718096">Sensory predictability &amp; emotional regulation</text>
+
+    <!-- Visual schedule cards -->
+    <g transform="translate(16, 62)">
+      <rect width="95" height="62" rx="6" fill="#ECFDF5" stroke="#A7F3D0"/>
+      <text x="10" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#065F46">1. Reading</text>
+      <text x="10" y="44" font-family="system-ui, sans-serif" font-size="10" fill="#047857">Done ✓</text>
+
+      <rect x="105" y="0" width="105" height="62" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+      <text x="115" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1E40AF">2. Math Blocks</text>
+      <text x="115" y="44" font-family="system-ui, sans-serif" font-size="10" fill="#2563EB">In progress (10m)</text>
+
+      <rect x="220" y="0" width="88" height="62" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="230" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#64748B">3. Recess</text>
+      <text x="230" y="44" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8">Next up</text>
+    </g>
+  </g>
+
+  <!-- Card 3: Dyscalculia / Math (Concrete Manipulatives & Place Value) -->
+  <g transform="translate(40, 250)">
+    <rect width="345" height="145" rx="12" fill="#FFFFFF" stroke="#E2DCD0" stroke-width="1.5"/>
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#FCE7F3"/>
+    <!-- Abacus/Math blocks icon -->
+    <rect x="22" y="24" width="8" height="8" rx="2" fill="#BE185D"/>
+    <rect x="32" y="24" width="8" height="8" rx="2" fill="#BE185D"/>
+    <rect x="22" y="34" width="8" height="8" rx="2" fill="#BE185D"/>
+    <rect x="32" y="34" width="8" height="8" rx="2" fill="#BE185D"/>
+    <text x="58" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1A202C">Concrete Manipulatives &amp; Columns</text>
+    <text x="58" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#718096">Place-value grounding &amp; physical counters</text>
+
+    <!-- Visual math column counters -->
+    <g transform="translate(16, 62)">
+      <rect width="98" height="66" rx="6" fill="#FEF2F2" stroke="#FECACA"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#991B1B">HUNDREDS (100)</text>
+      <rect x="10" y="28" width="78" height="28" rx="4" fill="#F87171" fill-opacity="0.2"/>
+      <text x="18" y="46" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#991B1B">2 Flats</text>
+
+      <rect x="106" y="0" width="98" height="66" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="116" y="20" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#1E40AF">TENS (10)</text>
+      <rect x="116" y="28" width="78" height="28" rx="4" fill="#60A5FA" fill-opacity="0.2"/>
+      <text x="124" y="46" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1E40AF">4 Rods</text>
+
+      <rect x="212" y="0" width="98" height="66" rx="6" fill="#F0FDF4" stroke="#BBF7D0"/>
+      <text x="222" y="20" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#166534">UNITS (1)</text>
+      <rect x="222" y="28" width="78" height="28" rx="4" fill="#4ADE80" fill-opacity="0.2"/>
+      <text x="230" y="46" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#166534">7 Cubes</text>
+    </g>
+  </g>
+
+  <!-- Card 4: Executive Function & Sensory Regulation -->
+  <g transform="translate(415, 250)">
+    <rect width="345" height="145" rx="12" fill="#FFFFFF" stroke="#E2DCD0" stroke-width="1.5"/>
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="#E0F2FE"/>
+    <!-- Calm wave icon -->
+    <path d="M 22 34 Q 28 26 32 34 T 42 34" stroke="#0369A1" stroke-width="2" fill="none"/>
+    <path d="M 22 28 Q 28 20 32 28 T 42 28" stroke="#0369A1" stroke-width="2" fill="none"/>
+    <text x="58" y="28" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1A202C">Calm Space &amp; Motor Chunking</text>
+    <text x="58" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#718096">Sensory quiet break &amp; low-friction input</text>
+
+    <g transform="translate(16, 62)">
+      <rect width="313" height="66" rx="6" fill="#F0F9FF" stroke="#BAE6FD"/>
+      <circle cx="36" cy="33" r="16" fill="#0284C7" fill-opacity="0.15"/>
+      <text x="31" y="38" font-family="system-ui, sans-serif" font-size="14">🎧</text>
+      <text x="64" y="28" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0369A1">Noise-Cancelling &amp; 3-Minute Rest</text>
+      <text x="64" y="46" font-family="system-ui, sans-serif" font-size="11" fill="#0C4A6E">Pre-emptive reset before cognitive overload or task fatigue</text>
+    </g>
+  </g>
+</svg>

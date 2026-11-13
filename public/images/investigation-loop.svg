@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 260" width="100%" height="100%" fill="none">
+  <!-- Background -->
+  <rect width="840" height="260" rx="16" fill="#FDFBF7" stroke="#E2DCD0" stroke-width="1.5"/>
+
+  <!-- Connecting Path / Pipeline -->
+  <path d="M 120 125 L 720 125" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="6 6"/>
+
+  <!-- Step 1 -->
+  <g transform="translate(40, 45)">
+    <circle cx="50" cy="80" r="32" fill="#FFFFFF" stroke="#1F4E3D" stroke-width="2.5"/>
+    <text x="50" y="86" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1F4E3D" text-anchor="middle">1</text>
+    <rect x="-10" y="125" width="120" height="60" rx="6" fill="#FFFFFF" stroke="#E2DCD0"/>
+    <text x="50" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1A202C" text-anchor="middle">Record</text>
+    <text x="50" y="162" font-family="system-ui, sans-serif" font-size="10" fill="#718096" text-anchor="middle">60s oral passage</text>
+    <text x="50" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#047857" text-anchor="middle">audio discarded</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g transform="translate(195, 45)">
+    <circle cx="50" cy="80" r="32" fill="#FFFFFF" stroke="#1F4E3D" stroke-width="2.5"/>
+    <text x="50" y="86" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1F4E3D" text-anchor="middle">2</text>
+    <rect x="-10" y="125" width="120" height="60" rx="6" fill="#FFFFFF" stroke="#E2DCD0"/>
+    <text x="50" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1A202C" text-anchor="middle">Align</text>
+    <text x="50" y="162" font-family="system-ui, sans-serif" font-size="10" fill="#718096" text-anchor="middle">Pure code metrics</text>
+    <text x="50" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#047857" text-anchor="middle">latencies &amp; tokens</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g transform="translate(350, 45)">
+    <circle cx="50" cy="80" r="32" fill="#FFFFFF" stroke="#1F4E3D" stroke-width="2.5"/>
+    <text x="50" y="86" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1F4E3D" text-anchor="middle">3</text>
+    <rect x="-10" y="125" width="120" height="60" rx="6" fill="#FFFFFF" stroke="#E2DCD0"/>
+    <text x="50" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1A202C" text-anchor="middle">Investigate</text>
+    <text x="50" y="162" font-family="system-ui, sans-serif" font-size="10" fill="#718096" text-anchor="middle">Meta AI Spark</text>
+    <text x="50" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#047857" text-anchor="middle">context &amp; patterns</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g transform="translate(505, 45)">
+    <circle cx="50" cy="80" r="32" fill="#FFFFFF" stroke="#1F4E3D" stroke-width="2.5"/>
+    <text x="50" y="86" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#1F4E3D" text-anchor="middle">4</text>
+    <rect x="-10" y="125" width="120" height="60" rx="6" fill="#FFFFFF" stroke="#E2DCD0"/>
+    <text x="50" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1A202C" text-anchor="middle">Verify</text>
+    <text x="50" y="162" font-family="system-ui, sans-serif" font-size="10" fill="#718096" text-anchor="middle">Automated gate</text>
+    <text x="50" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#047857" text-anchor="middle">100% evidence-tied</text>
+  </g>
+
+  <!-- Step 5 -->
+  <g transform="translate(660, 45)">
+    <circle cx="50" cy="80" r="32" fill="#1F4E3D" stroke="#1F4E3D" stroke-width="2.5"/>
+    <text x="50" y="86" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">5</text>
+    <rect x="-10" y="125" width="120" height="60" rx="6" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="50" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#14532D" text-anchor="middle">Accommodate</text>
+    <text x="50" y="162" font-family="system-ui, sans-serif" font-size="10" fill="#166534" text-anchor="middle">Try support</text>
+    <text x="50" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#15803D" text-anchor="middle">measure delta</text>
+  </g>
+</svg>
