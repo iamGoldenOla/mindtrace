@@ -72,6 +72,46 @@
       "description": "Offer a pale background tint for the passage as a comfort preference.",
       "how_to_try": "Let the learner pick none, pale blue, pale yellow, or pale green.",
       "how_to_evaluate": "Ask which they prefer. Record the choice only; claim no effect."
+    },
+    {
+      "key": "visual-daily-schedule",
+      "name": "Visual task schedule",
+      "barrier": "instructions",
+      "description": "A step-by-step visual sequence with icons indicating the exact order of tasks.",
+      "how_to_try": "Show cards in sequence. Remove or flip each card as the step is completed.",
+      "how_to_evaluate": "Note whether the learner transitions between steps with reduced hesitation or distress."
+    },
+    {
+      "key": "visual-transition-warning",
+      "name": "Visual transition countdown",
+      "barrier": "instructions",
+      "description": "A 5-minute and 2-minute visual card shown before switching classroom activities.",
+      "how_to_try": "Place a 5-minute warning card on the desk, followed by a 2-minute notice before changing tasks.",
+      "how_to_evaluate": "Check whether task switching occurs calmly and without task refusal."
+    },
+    {
+      "key": "sensory-quiet-break",
+      "name": "Sensory cool-down break",
+      "barrier": "instructions",
+      "description": "A planned 3-minute break in a quiet, low-glare space before high-demand cognitive tasks.",
+      "how_to_try": "Offer 3 minutes in a quiet reading corner or with noise-reducing headphones.",
+      "how_to_evaluate": "Observe engagement and sustained attention after returning from the quiet break."
+    },
+    {
+      "key": "concrete-math-manipulatives",
+      "name": "Concrete math manipulatives",
+      "barrier": "format",
+      "description": "Physical counters or base-10 blocks to represent quantities before writing numerical digits.",
+      "how_to_try": "Have the learner model the quantity physically with blocks before writing the math problem.",
+      "how_to_evaluate": "Compare problem-solving accuracy on math problems with versus without manipulatives."
+    },
+    {
+      "key": "colour-coded-columns",
+      "name": "Colour-coded place value columns",
+      "barrier": "format",
+      "description": "Coloured column guidelines (units, tens, hundreds) to prevent place-value swaps and alignment errors.",
+      "how_to_try": "Use distinct light colours for units and tens columns on arithmetic calculation sheets.",
+      "how_to_evaluate": "Check whether digit reversals or column misalignment errors decrease on subsequent tasks."
     }
   ]
 }

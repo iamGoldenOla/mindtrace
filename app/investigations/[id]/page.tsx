@@ -5,6 +5,7 @@ import { requireLearnerAccess } from "@/lib/auth/access";
 import { getRepository } from "@/lib/db";
 import { RunInvestigationButton } from "./run-investigation-button";
 import { SupportSection } from "./support-section";
+import { LinkAttemptForm } from "./link-attempt-form";
 
 export default async function InvestigationPage({ params }: { params: { id: string } }) {
   const user = await getDevUser();
@@ -24,6 +25,15 @@ export default async function InvestigationPage({ params }: { params: { id: stri
     const a = await repo.getAttempt(aid);
     if (a) attempts.push(a);
   }
+  const learnerAttempts = await repo.listAttemptsByLearner(investigation.learner_id);
+  const unlinkedAttempts = learnerAttempts
+    .filter((a) => !attemptIds.includes(a.id))
+    .map((a) => ({
+      id: a.id,
+      condition: a.condition,
+      status: a.status,
+      started_at: a.started_at,
+    }));
   const reports = await repo.listReportsByInvestigation(params.id);
 
   return (
@@ -55,6 +65,10 @@ export default async function InvestigationPage({ params }: { params: { id: stri
           ))}
         </ul>
       )}
+      <LinkAttemptForm
+        investigationId={investigation.id}
+        unlinkedAttempts={unlinkedAttempts}
+      />
       <div className="mt-6">
         <RunInvestigationButton investigationId={investigation.id} />
       </div>

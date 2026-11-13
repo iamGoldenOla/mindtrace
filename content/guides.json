@@ -102,6 +102,179 @@
       "how_to_judge": "Look for the pattern across attempts and check it against the home-language explanation first.",
       "when_to_seek_help": "If difficulty persists in all languages the learner uses, consider discussing it with a qualified professional.",
       "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "autism-communication-and-sensory",
+      "title": "Predictability, sensory and communication needs (autism-related patterns)",
+      "concern": "A learner shows heightened distress during unplanned transitions, reacts strongly to sensory stimuli, or communicates best with visual supports.",
+      "observable_behaviours": [
+        "Becomes visibly unsettled or stops participating when the classroom schedule changes without notice.",
+        "Covers ears, squints, or withdraws during noisy group work or under bright fluorescent lighting.",
+        "Follows instructions significantly better when accompanied by pictures or physical demonstrations than by verbal commands alone.",
+        "Repeats phrases verbatim (echolalia) or prefers solitary, predictable play during breaks."
+      ],
+      "context_questions": [
+        "Did distress coincide with high classroom noise, crowded spaces, or sudden routine changes?",
+        "Was the instruction delivered verbally in a busy room without visual cues?",
+        "Does the learner engage comfortably when activities follow a consistent, expected sequence?"
+      ],
+      "alternative_explanations": [
+        "The classroom environment has high acoustic reverberation or visual clutter.",
+        "The learner was caught off guard by an unannounced activity switch.",
+        "Verbal explanations were too rapid or contained complex figurative language."
+      ],
+      "things_to_try_now": [
+        "Use a visual schedule with picture cards showing the order of activities.",
+        "Give a 5-minute and a 2-minute verbal or visual warning before switching tasks.",
+        "Provide a quiet workspace corner or permit noise-reducing headphones during independent reading.",
+        "Pair verbal instructions with concrete visual cues."
+      ],
+      "what_to_record": [
+        "Which specific environmental triggers preceded distress (noise level, lighting, task change).",
+        "Whether task engagement changed after introducing a visual timetable.",
+        "Which communication format elicited the clearest responses."
+      ],
+      "how_to_judge": "Track task completion and signs of ease across one week with the visual schedule versus the prior baseline.",
+      "when_to_seek_help": "If significant sensory distress or communication barriers persist despite accommodations, discuss observations with a SENCo or qualified educational psychologist.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "mathematics-number-sense",
+      "title": "Mathematics and number relationships (dyscalculia-related patterns)",
+      "concern": "A learner experiences persistent difficulty with basic number concepts, magnitude comparison, or place-value calculations.",
+      "observable_behaviours": [
+        "Struggles to identify which quantity is larger without counting every single item one by one.",
+        "Reverses or inverts digits in multi-digit numbers (writing 42 for 24).",
+        "Consistently subtracts the smaller digit from the larger regardless of column position (e.g. 52 - 17 = 45).",
+        "Has difficulty estimating position on a 0 to 20 number line.",
+        "Relies heavily on finger counting for simple additions well past the expected stage."
+      ],
+      "context_questions": [
+        "Does difficulty increase when numbers are presented purely as abstract symbols rather than concrete objects?",
+        "Has the learner mastered basic one-to-one counting principles?",
+        "Does the layout of the math worksheet cause visual crowding or misalignment?"
+      ],
+      "alternative_explanations": [
+        "Working memory overload from multi-step written arithmetic.",
+        "Lack of prior experience with concrete math manipulatives.",
+        "Spatial confusion caused by crowded worksheets without clear columns."
+      ],
+      "things_to_try_now": [
+        "Use physical manipulatives (base-10 blocks, bead strings, counters) before writing numbers.",
+        "Provide colour-coded columns for units, tens, and hundreds on arithmetic tasks.",
+        "Use visual spatial number lines with landmarks at 5, 10, and 15.",
+        "Allow extra processing time and oral explanation of math reasoning."
+      ],
+      "what_to_record": [
+        "Specific error patterns in multi-digit operations (e.g. column swaps, direction of subtraction).",
+        "Difference in accuracy when using physical counters versus written digits alone.",
+        "Response time and strategy used for quantity comparisons."
+      ],
+      "how_to_judge": "Compare accuracy and confidence on comparable 10-item math sets with and without physical manipulatives.",
+      "when_to_seek_help": "If persistent difficulties with basic number sense and magnitude endure after sustained structured support, consider consulting a specialist.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "speech-and-language",
+      "title": "Speech sound production and expressive language",
+      "concern": "A learner experiences difficulty producing clear speech sounds or structuring spoken sentences.",
+      "observable_behaviours": [
+        "Consistently omits or substitutes specific consonant sounds in spoken words.",
+        "Understands complex stories but responds with one- or two-word phrases.",
+        "Demonstrates hesitation or word-finding pauses when describing everyday events."
+      ],
+      "context_questions": [
+        "Does the learner communicate with greater fluency in their home language?",
+        "Has the learner recently had a hearing or middle-ear check?",
+        "Does speech clarity improve in quiet, one-on-one conversation?"
+      ],
+      "alternative_explanations": [
+        "Temporary hearing attenuation from middle-ear fluid (glue ear).",
+        "Second-language acquisition process (silent period or developmental sound approximations).",
+        "Performance anxiety when speaking in front of peers."
+      ],
+      "things_to_try_now": [
+        "Model correct sound production gently without asking for forced repetition.",
+        "Allow alternative response formats such as pointing, drawing, or gesture.",
+        "Ensure clear face-to-face visual contact when speaking.",
+        "Provide extra wait time (5 to 8 seconds) before expecting a spoken answer."
+      ],
+      "what_to_record": [
+        "Which specific sound clusters or words show consistent substitutions.",
+        "Language used at home and age of first exposure to the language of instruction.",
+        "Observations of listening and comprehension in quiet versus noisy rooms."
+      ],
+      "how_to_judge": "Observe whether clarity and communicative confidence increase with one-to-one wait time over two weeks.",
+      "when_to_seek_help": "If speech clarity severely impedes peer understanding or persists across settings, consider a referral to a speech and language therapist.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "writing-and-motor",
+      "title": "Writing demands, fine motor, and letter formation",
+      "concern": "A learner demonstrates severe fatigue, pain, or illegibility during handwriting tasks.",
+      "observable_behaviours": [
+        "Holds pencil with an unusually tight, awkward grip and presses heavily into the page.",
+        "Expresses thoughts orally with rich vocabulary but writes only short, fragmented sentences.",
+        "Struggles with spacing between words and keeping letters on horizontal ruled lines."
+      ],
+      "context_questions": [
+        "Does the learner complain of hand cramps or fatigue after 3 minutes of writing?",
+        "Is letter formation markedly improved on a tablet or keyboard?",
+        "How is the learner's posture and desk height relative to their seat?"
+      ],
+      "alternative_explanations": [
+        "Desk or chair size mismatch causing physical strain.",
+        "Inappropriate pencil thickness or friction on paper.",
+        "High cognitive burden of spelling interfering with fine-motor coordination."
+      ],
+      "things_to_try_now": [
+        "Provide triangular pencil grips or softer writing implements.",
+        "Allow speech-to-text or oral transcription for expressive content.",
+        "Use raised-line paper to give tactile boundaries for letter sizing.",
+        "Separate the writing task into idea drafting first, handwriting second."
+      ],
+      "what_to_record": [
+        "Length of continuous handwriting achieved before visible fatigue or pain.",
+        "Comparison of content depth between oral answers and written answers.",
+        "Pencil grip style and seating posture."
+      ],
+      "how_to_judge": "Compare sentence complexity and learner fatigue when using keyboard or oral response versus pen and paper.",
+      "when_to_seek_help": "If fine motor coordination or physical discomfort continues to hinder classroom access, consult an occupational therapist.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
+    },
+    {
+      "slug": "anxiety-and-fatigue",
+      "title": "Anxiety, sensory load, and environmental factors",
+      "concern": "A learner exhibits sudden drops in performance, freezing, or disengagement linked to stress or fatigue.",
+      "observable_behaviours": [
+        "Shuts down, puts head on desk, or says 'I can't do this' before even reading the question.",
+        "Performance is strong in the first hour of school but drops steeply after lunch.",
+        "Shows physical signs of anxiety (fidgeting, breath holding, rapid heartbeat) during timed or public tasks."
+      ],
+      "context_questions": [
+        "Did difficulty occur during a timed assessment or public reading in front of peers?",
+        "What was the noise and activity level in the classroom immediately beforehand?",
+        "Did the learner sleep well and have breakfast before school?"
+      ],
+      "alternative_explanations": [
+        "High cumulative cognitive fatigue from continuous processing.",
+        "Fear of peer embarrassment or negative evaluation.",
+        "Physical tiredness, illness, or unmet nutritional needs."
+      ],
+      "things_to_try_now": [
+        "Remove all countdown timers and public read-aloud demands.",
+        "Offer a predictable 'pass' option where the learner can listen without penalty.",
+        "Incorporate a 3-minute quiet breathing or physical stretch break.",
+        "Break assessments into bite-sized 5-minute segments."
+      ],
+      "what_to_record": [
+        "Times of day when disengagement or freezing occurs most frequently.",
+        "Difference in performance between untimed, quiet conditions and timed group settings.",
+        "Learner's self-reported comfort level when given advance notice."
+      ],
+      "how_to_judge": "Observe engagement and task willingness when timed pressure is removed over a 5-day cycle.",
+      "when_to_seek_help": "If anxiety or withdrawal significantly impairs daily functioning across school and home, consult a pastoral care lead or child psychologist.",
+      "non_diagnostic_statement": "MINDTRACE gives educational observations, not diagnoses."
     }
   ]
 }

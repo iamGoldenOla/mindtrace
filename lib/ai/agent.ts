@@ -2,7 +2,6 @@
 // Code assembles the evidence; the model interprets it; the verifier and
 // deterministic filters decide whether the report may be shown.
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
 import { chat, type ChatMessage } from "./provider";
 import { TOOL_DEFINITIONS, executeTool } from "./tools";
 import { ReportSchema, checkReportRules, SCHEMA_VERSION, type ReportV1 } from "./schema";
@@ -10,12 +9,13 @@ import { deterministicFilter, runVerifier } from "./verify";
 import { scrubFreeText } from "./scrub";
 import { getRepository } from "@/lib/db";
 import supportsCatalog from "@/content/supports.json";
+import { INVESTIGATOR_PROMPT } from "./prompts/investigator";
 
 const MAX_ROUNDS = 6;
 const MODEL = process.env.AI_MODEL_REASONING ?? "muse-spark-1.3";
 
 function investigatorPrompt(): string {
-  return readFileSync(new URL("./prompts/investigator.v1", import.meta.url), "utf8");
+  return INVESTIGATOR_PROMPT;
 }
 
 function hashOf(value: string): string {

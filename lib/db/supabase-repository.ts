@@ -612,12 +612,12 @@ export class SupabaseRepository implements Repository {
     for (const [table, column, impossible] of wipe) {
       await write(
         this.db.from(table).delete().neq(column, impossible as never),
-        "replaceAll",
+        `replaceAll: delete from ${table}`,
       );
     }
     const put = async <T>(table: string, rows: T[]): Promise<void> => {
       if (rows.length === 0) return;
-      await write(this.db.from(table).insert(rows), "replaceAll");
+      await write(this.db.from(table).insert(rows), `replaceAll: insert into ${table}`);
     };
     await put("profiles", db.profiles);
     await put("assessment_definitions", db.assessment_definitions);

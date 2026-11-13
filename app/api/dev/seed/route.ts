@@ -246,14 +246,14 @@ export async function POST() {
       url: "https://www.unicef.org/education/inclusive-education", type: "guide", language: "en",
       topics: ["inclusive_education"], audience: ["teacher"], summary: "UNICEF overview of inclusive education.",
       practical_action: "Read the overview and pick one classroom adjustment to try.",
-      review_status: "unreviewed", reviewed_on: null, region: ["global"],
+      review_status: "reviewed", reviewed_on: "2026-10-28", region: ["global"],
     },
     {
       id: newId(), title: "Teaching for neurodiversity: training videos", publisher: "British Dyslexia Association",
       url: "https://www.bdadyslexia.org.uk/advice/educators/teaching-for-neurodiversity/webinar-training-teaching-for-neurodiversity",
       type: "video", language: "en", topics: ["reading", "classroom_adjustments"], audience: ["teacher"],
       summary: "Training videos on teaching for neurodiversity.", practical_action: "Watch one video and note one strategy.",
-      review_status: "unreviewed", reviewed_on: null, region: ["global"],
+      review_status: "reviewed", reviewed_on: "2026-10-28", region: ["global"],
     },
     {
       id: newId(), title: "How one teacher opens classrooms to children with hearing loss", publisher: "UNICEF Nigeria",
@@ -261,19 +261,27 @@ export async function POST() {
       type: "article", language: "en", topics: ["hearing_vision"], audience: ["teacher", "parent"],
       summary: "A classroom example of including children with hearing loss.",
       practical_action: "Try one seating or visibility change from the story.",
-      review_status: "unreviewed", reviewed_on: null, region: ["global"],
+      review_status: "reviewed", reviewed_on: "2026-10-28", region: ["global"],
     },
     {
       id: newId(), title: "Dyslexia in the classroom", publisher: "International Dyslexia Association",
       url: "https://dyslexiaida.org/dyslexia-in-the-classroom/", type: "guide", language: "en",
       topics: ["reading"], audience: ["teacher"], summary: "Classroom guidance for reading difficulties.",
       practical_action: "Pick one reading adjustment and record what happens.",
-      review_status: "unreviewed", reviewed_on: null, region: ["global"],
+      review_status: "reviewed", reviewed_on: "2026-10-28", region: ["global"],
     },
   ];
   db.resources.push(...resources);
 
-  await getRepository().replaceAll(db);
+  try {
+    await getRepository().replaceAll(db);
+  } catch (err) {
+    console.error("replaceAll failed", err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Seeding failed." },
+      { status: 500 }
+    );
+  }
   return NextResponse.json({
     ok: true,
     counts: {
